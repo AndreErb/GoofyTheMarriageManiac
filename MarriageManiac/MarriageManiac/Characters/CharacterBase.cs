@@ -46,10 +46,12 @@ namespace MarriageManiac
             Visible = true;
             CanCollide = true;
             Origin = new Vector2();
+            SoundStore = new SoundEngine();
             AllowFall = true;
             LifePercentage = 100;
+            InitSounds();
         }
-
+        
         public event EventHandler<LifeAmountChangedArgs> LifeAmountChanged; 
         public event EventHandler<WouldCollideEventArgs> WouldCollideWith;
         
@@ -60,6 +62,7 @@ namespace MarriageManiac
         public bool Visible { get; set; }
         public bool CanCollide { get; set; }
         public bool AllowFall { get; set; }
+        protected SoundEngine SoundStore { get; private set; }
 
         public virtual decimal LifePercentage
         {
@@ -127,7 +130,14 @@ namespace MarriageManiac
                 ViewDirection = direction;
             }
         }
-        
+
+        private void InitSounds()
+        {
+            var jump = SoundStore.Create("Jump");
+            jump.Volume = 0.1f;
+        }
+
+                
         private void Move(IEnumerable<ICollidable> collidables)
         {
             if (!moving && Direction == Direction.Left)
@@ -220,6 +230,7 @@ namespace MarriageManiac
                 {
                     _Velocity.Y = -25;
                     jumping = true;
+                    SoundStore.Sound("Jump").Play();
                 }
 
                 if (jumping)
@@ -227,12 +238,13 @@ namespace MarriageManiac
                     var preview = new Point(Bounds.X, (int)(Bounds.Y + _Velocity.Y));
                     var collision = WouldCollide(collidables, preview);
 
-                    if (collision == null || collision is IHurt) // We should be able to land and stand on shots (= IHurt) etc (Is this true for all IHurt???)
-                    {
+                    if (collision == null || collision is IHurt) // We should NOT be able to land and stand on shots (= IHurt) etc (Is this true for all IHurt???)
+                    {                        
                         _Bounds.Y = Bounds.Y + (int)_Velocity.Y;
                     }
                     else if (collision.Bounds.Bottom > Bounds.Y) // Prevents jumping onto bricks, which are far above the character.
                     {
+                        SoundStore.Sound("Jump").Stop();
                         // Jumped an landed on something.
                         _Bounds.Y = collision.Bounds.Y - Bounds.Height;
                         jumping = false;

@@ -17,6 +17,13 @@ namespace MarriageManiac.Characters
 
             CurrentImage = ImageLeft;
             Bounds = new Rectangle(startX, startY, CurrentImage.Width, CurrentImage.Height);
+
+            SoundStore.Create("FemaleScream");
+        }
+
+        public void Scream()
+        {
+            SoundStore.Sound("FemaleScream").Play();
         }
     }
 }

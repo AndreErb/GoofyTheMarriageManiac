@@ -23,6 +23,12 @@ namespace MarriageManiac.Scenes
         public Level1Scene()
             : base()
         {
+            var music = SoundStore.Create("PacmanMusic");
+            music.Pitch = -0.4f;
+            music.Volume = 0.4f;
+            music.IsLooped = true;
+            music.Play();
+
             _CloudTexture = GoofyGame.CONTENT.Load<Texture2D>("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);

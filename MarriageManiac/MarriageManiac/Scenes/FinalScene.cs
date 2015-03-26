@@ -151,6 +151,7 @@ namespace MarriageManiac
             if (e.CurrentLifePercentage <= 0)
             {
                 SoundStore.Sound("HorrorMusic").Stop();
+                _Goofy.Laugh();
                 Remove(_Flash);
                 BackColor = Color.CornflowerBlue;
             }

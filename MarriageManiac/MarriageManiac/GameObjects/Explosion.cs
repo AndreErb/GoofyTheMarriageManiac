@@ -16,6 +16,10 @@ namespace MarriageManiac.GameObjects
             : base(startX, startY, GoofyGame.CONTENT.Load<Texture2D>("Explosion"))
         {
             CanCollide = false;
+
+            var explosion = new SoundEngine().Create("SmallExplosion");
+            explosion.Volume = 0.15f;
+            explosion.Play();
         }
                 
         public override void Update(Scene scene, GameTime gameTime)

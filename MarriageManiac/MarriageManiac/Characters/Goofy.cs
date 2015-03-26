@@ -23,7 +23,7 @@ namespace MarriageManiac.Characters
             Bounds = new Rectangle(startX, startY, CurrentImage.Width, CurrentImage.Height);
 
             LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(Goofy_LifeAmountChanged);
-
+            var laughing = SoundStore.Create("GoofyLaugh");
         }
                         
         private Texture2D ImageLeft { get; set; }
@@ -42,6 +42,11 @@ namespace MarriageManiac.Characters
             }
             
             base.Update(scene, gameTime);
+        }
+
+        public void Laugh()
+        {
+            SoundStore.Sound("GoofyLaugh").Play();
         }
 
         private void MoveUserControlled(KeyboardState keyboard)

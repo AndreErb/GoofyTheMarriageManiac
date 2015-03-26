@@ -134,6 +134,12 @@ namespace MarriageManiac.Scenes
             {
                 if (_TurnAround)
                 {
+                    if (Action.IsNotDone("Screamed"))
+                    {
+                        Action.SetDone("Screamed");
+                        _Daisy.Scream();
+                    }
+
                     _Daisy.Bounds = new Rectangle(_PanzerknackerGroup.Bounds.Right + 2, _Daisy.Bounds.Y, _Daisy.Bounds.Width, _Daisy.Bounds.Height);
                     _Daisy.Move(Direction.Right);
                     _PanzerknackerGroup.Move(Direction.Right);

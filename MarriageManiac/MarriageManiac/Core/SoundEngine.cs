@@ -15,6 +15,11 @@ namespace MarriageManiac.Core
 
         private Dictionary<string, SoundEffectInstance> Store { get; set; }
 
+        public SoundEffectInstance Create(string soundName)
+        {
+            return Create(soundName, soundName);
+        }
+
         public SoundEffectInstance Create(string soundName, string fileName)
         {
             if (!Store.ContainsKey(soundName))
