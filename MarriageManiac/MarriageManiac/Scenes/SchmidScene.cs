@@ -9,10 +9,11 @@ using Microsoft.Xna.Framework.Input;
 using MarriageManiac.Characters;
 using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
+using MarriageManiac.Core.Rectangles;
 
 namespace MarriageManiac.Scenes
 {
-    public class Level2Scene : Scene
+    public class SchmidScene : Scene
     {
         Goofy _Goofy = null;
         Schmid _Schmid = null;
@@ -26,8 +27,11 @@ namespace MarriageManiac.Scenes
         bool _QuestionShown = false;
         bool _AnswerShown = false;
         bool _RightAnswer = false;
+        FillableRectangle _GoofyLifeBar;
+        const int _LifeBarWidth = 400;
+        Text _LifeText;
 
-        public Level2Scene()
+        public SchmidScene()
             : base()
         {
             _CloudTexture = GoofyGame.CONTENT.Load<Texture2D>("cloud_PNG13");
@@ -47,12 +51,23 @@ namespace MarriageManiac.Scenes
             _Diagram.TargetReached += (obj, arg) => { _Diagram.Position = new Vector2(0, 0); };
             _Diagram.MoveToTarget(1000, 700, 0.1f);
 
+            var screenMiddle = GoofyGame.SCREENWIDTH / 2;
+            var distanceFromMiddle = 10;
+
+            var goofyIcon = new GoofyIcon(0, 0);
+            goofyIcon.Position = new Vector2(screenMiddle - distanceFromMiddle - goofyIcon.Bounds.Width, 10);
+            _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
+            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
+
             DrawableObjects.Add(_LevelSymbol);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Diagram);
             DrawableObjects.Add(_Goofy);
             DrawableObjects.Add(_Schmid);
+            DrawableObjects.Add(goofyIcon);
+            DrawableObjects.Add(_GoofyLifeBar);
+            DrawableObjects.Add(_LifeText);
             CollidableObjects.Add(_Goofy);
             CollidableObjects.Add(_Schmid);
         }
@@ -141,6 +156,19 @@ namespace MarriageManiac.Scenes
 
                 DrawableTexts.Add(_Question);
                 _QuestionShown = true;
+            }
+        }
+
+        void _Goofy_LifeAmountChanged(object sender, LifeAmountChangedArgs e)
+        {
+            _GoofyLifeBar.FillPercentage = e.CurrentLifePercentage;
+
+            if (e.CurrentLifePercentage <= 0 && Action.IsNotDone("GoofyHasDied"))
+            {
+                Action.SetDone("GoofyHasDied");
+                
+                _Goofy.Die();
+                _LifeText.Text = " X " + _Goofy.Lifes;
             }
         }
     }

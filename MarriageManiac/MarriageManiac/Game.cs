@@ -26,7 +26,7 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
-        int _LevelIndex = 1;
+        int _LevelIndex = 5;
         
         public GoofyGame()
         {
@@ -37,7 +37,6 @@ namespace MarriageManiac
             Content.RootDirectory = "Content";
             CONTENT = Content;
         }
-
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -50,7 +49,6 @@ namespace MarriageManiac
             // TODO: Add your initialization logic here            
             base.Initialize();
         }
-
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -68,8 +66,7 @@ namespace MarriageManiac
         {
             LoadLevel(++_LevelIndex);
         }
-
-
+        
         private void LoadLevel(int level)
         {
             string levelName = String.Format("Level{0}.txt", _LevelIndex);
@@ -82,30 +79,35 @@ namespace MarriageManiac
 
                 switch (_LevelIndex)
                 {
-                    case 0:
+                    case 0: // Prolog
                         scene = new PrologScene();
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
-                    case 1:
-                        scene = new Level1Scene();
+                    case 1: // Speed-Level
+                        scene = new SpeedScene();
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
-
-                    case 2:
-                        scene = new Level2Scene();
+                    case 2: // Pfadfinder
+                        scene = new PfadfinderScene();
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
-
-                    case 3:
+                    case 3: // Schmid
+                        scene = new SchmidScene();
+                        scene.Ended += new EventHandler(scene_Ended);
+                        _Level = new Level(scene, levelFile);
+                        break;
+                    case 4: // Garloff
+                        scene = new GarloffScene();
+                        scene.Ended += new EventHandler(scene_Ended);
+                        _Level = new Level(scene, levelFile);
+                        break;
+                    case 5: // Endboss
                         scene = new FinalScene();
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
-                        break;
-
-                    case 4:
                         break;
                 }
 
@@ -116,7 +118,6 @@ namespace MarriageManiac
             }
         }
 
-
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -125,8 +126,7 @@ namespace MarriageManiac
         {
             // TODO: Unload any non ContentManager content here            
         }
-
-
+        
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -144,8 +144,7 @@ namespace MarriageManiac
                 
             base.Update(gameTime);
         }
-
-        
+                
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
