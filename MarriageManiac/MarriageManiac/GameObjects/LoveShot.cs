@@ -11,7 +11,7 @@ namespace MarriageManiac.GameObjects
     class LoveShot : DrawableMovableCollidable, IGameContent, IHurt
     {
         public LoveShot(CharacterBase shooter)
-            : base(shooter.Bounds.Right, shooter.Bounds.Top, GoofyGame.CONTENT.Load<Texture2D>("HeartShotRight"))
+            : base(shooter.Bounds.Right, shooter.Bounds.Top, ContentStore.LoadImage("HeartShotRight"))
         {
             Goofy = shooter;
             Visible = false;
@@ -37,11 +37,11 @@ namespace MarriageManiac.GameObjects
                 {
                     xDirection *= -1;
                     Position = new Vector2(Goofy.Bounds.Left - this.Bounds.Width, Goofy.Bounds.Top);
-                    CurrentImage = GoofyGame.CONTENT.Load<Texture2D>("HeartShotLeft");
+                    CurrentImage = ContentStore.LoadImage("HeartShotLeft");
                 }
                 else
                 {
-                    CurrentImage = GoofyGame.CONTENT.Load<Texture2D>("HeartShotRight");
+                    CurrentImage = ContentStore.LoadImage("HeartShotRight");
                 }
 
                 MoveToTarget(1200 * xDirection, Goofy.Bounds.Top, 0.35f);

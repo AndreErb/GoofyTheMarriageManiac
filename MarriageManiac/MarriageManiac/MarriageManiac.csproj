@@ -117,6 +117,7 @@
     <Compile Include="Characters\StandardCharacter.cs" />
     <Compile Include="Core\ActionStore.cs" />
     <Compile Include="Core\CollisionObject.cs" />
+    <Compile Include="Core\ContentStore.cs" />
     <Compile Include="Core\Drawable.cs" />
     <Compile Include="Core\DrawableMovable.cs" />
     <Compile Include="Core\DrawableMovableCollidable.cs" />

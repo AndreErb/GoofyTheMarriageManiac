@@ -16,7 +16,7 @@ namespace MarriageManiac.Texts
         {
             _Position = new Vector2(xPos, yPos);
             Text = null;
-            Font = GoofyGame.CONTENT.Load<SpriteFont>(font);
+            Font = ContentStore.LoadFont(font);
             Color = color;
             Scale = 1.0f;
             Visible = true;
@@ -25,7 +25,7 @@ namespace MarriageManiac.Texts
 
             if (!String.IsNullOrEmpty(texture))
             {
-                CurrentImage = GoofyGame.CONTENT.Load<Texture2D>(texture);
+                CurrentImage = ContentStore.LoadImage(texture);
             }
         }
 

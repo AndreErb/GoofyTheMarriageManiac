@@ -112,7 +112,7 @@ namespace MarriageManiac
                     {
                         if (_BlockTexture == null)
                         {
-                            _BlockTexture = GoofyGame.CONTENT.Load<Texture2D>("Brick_Block");
+                            _BlockTexture = ContentStore.LoadImage("Brick_Block");
                         }
 
                         var bounds = new Rectangle(x * BLOCKSIZE, y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);

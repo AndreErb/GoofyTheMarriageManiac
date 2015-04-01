@@ -37,9 +37,9 @@ namespace MarriageManiac
             horrorMusic.Pitch = 0.5f;
             horrorMusic.Play();
 
-            _CloudTexture = GoofyGame.CONTENT.Load<Texture2D>("cloud_PNG13");
+            _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _LevelSymbol = new DrawableMovable(-100, -100, GoofyGame.CONTENT.Load<Texture2D>("Level1"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
@@ -67,7 +67,7 @@ namespace MarriageManiac
 
             _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
 
-            _Flash = new Flash(0, 0, GoofyGame.CONTENT.Load<Texture2D>("Flash"));
+            _Flash = new Flash(0, 0, ContentStore.LoadImage("Flash"));
 
             BackColor = Color.Gray;
             _Flash.Start();

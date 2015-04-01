@@ -10,7 +10,7 @@ namespace MarriageManiac.GameObjects
     class GoofyIcon : DrawableMovableCollidable, IGameContent
     {
         public GoofyIcon(int x, int y)
-            : base(x, y, GoofyGame.CONTENT.Load<Texture2D>("GoofyLogo"))
+            : base(x, y, ContentStore.LoadImage("GoofyLogo"))
         {
         }
     }

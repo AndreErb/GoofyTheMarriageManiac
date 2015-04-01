@@ -13,7 +13,7 @@ namespace MarriageManiac.GameObjects
         TimeSpan _TimeShown = new TimeSpan();
 
         public Explosion(int startX, int startY)
-            : base(startX, startY, GoofyGame.CONTENT.Load<Texture2D>("Explosion"))
+            : base(startX, startY, ContentStore.LoadImage("Explosion"))
         {
             CanCollide = false;
 

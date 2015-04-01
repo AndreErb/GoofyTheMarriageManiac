@@ -42,170 +42,170 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Brick_Block.png">
+    <Compile Include="Images\Brick_Block.png">
       <Name>Brick_Block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoofyRunningRight.png">
+    <Compile Include="Images\GoofyRunningRight.png">
       <Name>GoofyRunningRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoofyRunningLeft.png">
+    <Compile Include="Images\GoofyRunningLeft.png">
       <Name>GoofyRunningLeft</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cloud_PNG13.png">
+    <Compile Include="Images\cloud_PNG13.png">
       <Name>cloud_PNG13</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Panzerknacker_Links.png">
+    <Compile Include="Images\Panzerknacker_Links.png">
       <Name>Panzerknacker_Links</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Panzerknacker_Rechts.png">
+    <Compile Include="Images\Panzerknacker_Rechts.png">
       <Name>Panzerknacker_Rechts</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DaisyInLove.png">
+    <Compile Include="Images\DaisyInLove.png">
       <Name>DaisyInLove</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DaisyFear.png">
+    <Compile Include="Images\DaisyFear.png">
       <Name>DaisyFear</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flash.png">
+    <Compile Include="Images\Flash.png">
       <Name>Flash</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comic.spritefont">
+    <Compile Include="Fonts\Comic.spritefont">
       <Name>Comic</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sun.png">
+    <Compile Include="Images\Sun.png">
       <Name>Sun</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Level1.png">
+    <Compile Include="Images\Level1.png">
       <Name>Level1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Schriftrolle.png">
+    <Compile Include="Images\Schriftrolle.png">
       <Name>Schriftrolle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SnoopyLinks.png">
+    <Compile Include="Images\SnoopyLinks.png">
       <Name>SnoopyLinks</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="SnoopyRechts.png">
+    <Compile Include="Images\SnoopyRechts.png">
       <Name>SnoopyRechts</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UFO_Links.png">
+    <Compile Include="Images\UFO_Links.png">
       <Name>UFO_Links</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="UFO_Rechts.png">
+    <Compile Include="Images\UFO_Rechts.png">
       <Name>UFO_Rechts</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="garloff.png">
+    <Compile Include="Images\garloff.png">
       <Name>garloff</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="pi.png">
+    <Compile Include="Images\pi.png">
       <Name>pi</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="summe.png">
+    <Compile Include="Images\summe.png">
       <Name>summe</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="klassendiag.png">
+    <Compile Include="Images\klassendiag.png">
       <Name>klassendiag</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HeartShotLeft.png">
+    <Compile Include="Images\HeartShotLeft.png">
       <Name>HeartShotLeft</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="HeartShotRight.png">
+    <Compile Include="Images\HeartShotRight.png">
       <Name>HeartShotRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Explosion.png">
+    <Compile Include="Images\Explosion.png">
       <Name>Explosion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UfoSmall.png">
+    <Compile Include="Images\UfoSmall.png">
       <Name>UfoSmall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Brecheisen.png">
+    <Compile Include="Images\Brecheisen.png">
       <Name>Brecheisen</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -233,42 +233,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoofyLogo.png">
+    <Compile Include="Images\GoofyLogo.png">
       <Name>GoofyLogo</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameOver.png">
+    <Compile Include="Images\GameOver.png">
       <Name>GameOver</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SchmidLinks.png">
+    <Compile Include="Images\SchmidLinks.png">
       <Name>SchmidLinks</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SchmidRechts.png">
+    <Compile Include="Images\SchmidRechts.png">
       <Name>SchmidRechts</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GarloffLinks.png">
+    <Compile Include="Images\GarloffLinks.png">
       <Name>GarloffLinks</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GarloffRechts.png">
+    <Compile Include="Images\GarloffRechts.png">
       <Name>GarloffRechts</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

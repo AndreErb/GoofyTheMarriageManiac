@@ -14,7 +14,7 @@ namespace MarriageManiac.GameObjects
         
         static GameOverSymbol()
         {
-            Image = GoofyGame.CONTENT.Load<Texture2D>("GameOver");
+            Image = ContentStore.LoadImage("GameOver");
         }
 
         public GameOverSymbol()

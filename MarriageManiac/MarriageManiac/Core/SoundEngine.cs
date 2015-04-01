@@ -24,7 +24,7 @@ namespace MarriageManiac.Core
         {
             if (!Store.ContainsKey(soundName))
             {
-                var sound = GoofyGame.CONTENT.Load<SoundEffect>("Audio\\" + fileName).CreateInstance();
+                var sound = ContentStore.LoadSound(fileName).CreateInstance();
                 Store.Add(soundName, sound);
             }
             

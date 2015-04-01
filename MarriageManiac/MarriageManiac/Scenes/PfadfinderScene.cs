@@ -25,14 +25,14 @@ namespace MarriageManiac.Scenes
         public PfadfinderScene()
             : base()
         {
-            _CloudTexture = GoofyGame.CONTENT.Load<Texture2D>("cloud_PNG13");
+            _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
 
             _Snoopy = new Snoopy(500, 600);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, GoofyGame.CONTENT.Load<Texture2D>("Level1"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.

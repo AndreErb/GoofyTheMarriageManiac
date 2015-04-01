@@ -32,8 +32,8 @@ namespace MarriageManiac.Scenes
             var music = SoundStore.Create("KissMusic", "Kiss_The_Girl");
             music.IsLooped = true;
             music.Play();
-            
-            _CloudTexture = GoofyGame.CONTENT.Load<Texture2D>("cloud_PNG13");
+
+            _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             var text = "An einem wunderschönen Frühlingstag:" + Environment.NewLine +
                        "Goofy und Daisy-Dani knutschen rum, " + Environment.NewLine +
@@ -42,9 +42,9 @@ namespace MarriageManiac.Scenes
             _Text = new DelayedText(TimeSpan.FromSeconds(0.06), 300, 300, "Comic", Color.Gold, text, null);
             _Text.Completed += (t, args) => _TextCompleted = true;
 
-            _Sun = new Drawable(700, 40, GoofyGame.CONTENT.Load<Texture2D>("Sun"));
+            _Sun = new Drawable(700, 40, ContentStore.LoadImage("Sun"));
 
-            _Flash = new Flash(0, 0, GoofyGame.CONTENT.Load<Texture2D>("Flash"));
+            _Flash = new Flash(0, 0, ContentStore.LoadImage("Flash"));
             _Flash.Visible = false;
 
             _Goofy = new Goofy(10, 660);

@@ -10,7 +10,7 @@ namespace MarriageManiac.GameObjects
     class UfoIcon : DrawableMovableCollidable, IGameContent
     {
         public UfoIcon(int x, int y)
-            : base(x, y, GoofyGame.CONTENT.Load<Texture2D>("UfoSmall"))
+            : base(x, y, ContentStore.LoadImage("UfoSmall"))
         {
         }
     }

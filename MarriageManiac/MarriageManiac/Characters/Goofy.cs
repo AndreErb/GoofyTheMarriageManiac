@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MarriageManiac.GameObjects;
+using MarriageManiac.Core;
 
 namespace MarriageManiac.Characters
 {
@@ -16,8 +17,8 @@ namespace MarriageManiac.Characters
         public Goofy(int startX, int startY)
             : base()
         {
-            ImageLeft = GoofyGame.CONTENT.Load<Texture2D>("GoofyRunningLeft");
-            ImageRight = GoofyGame.CONTENT.Load<Texture2D>("GoofyRunningRight");
+            ImageLeft = ContentStore.LoadImage("GoofyRunningLeft");
+            ImageRight = ContentStore.LoadImage("GoofyRunningRight");
 
             CurrentImage = ImageRight;
             Bounds = new Rectangle(startX, startY, CurrentImage.Width, CurrentImage.Height);

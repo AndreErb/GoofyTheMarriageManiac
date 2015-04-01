@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using MarriageManiac.Core;
 
 namespace MarriageManiac.Characters
 {
@@ -12,8 +13,8 @@ namespace MarriageManiac.Characters
         public Garloff(int startX, int startY)
             : base()
         {
-            ImageLeft = GoofyGame.CONTENT.Load<Texture2D>("GarloffLinks");
-            ImageRight = GoofyGame.CONTENT.Load<Texture2D>("GarloffRechts");
+            ImageLeft = ContentStore.LoadImage("GarloffLinks");
+            ImageRight = ContentStore.LoadImage("GarloffRechts");
 
             CurrentImage = ImageLeft;
             Bounds = new Rectangle(startX, startY, CurrentImage.Width, CurrentImage.Height);

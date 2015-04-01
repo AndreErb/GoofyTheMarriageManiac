@@ -15,7 +15,7 @@ namespace MarriageManiac.GameObjects
         bool _Started = false;
 
         public Ufo(int startX, int startY)
-            : base(startX, startY, GoofyGame.CONTENT.Load<Texture2D>("UFO_Links"))
+            : base(startX, startY, ContentStore.LoadImage("UFO_Links"))
         {
             MoveArea = new Rectangle(400, 50, 500, 400);
             LastMoveTime = new TimeSpan();

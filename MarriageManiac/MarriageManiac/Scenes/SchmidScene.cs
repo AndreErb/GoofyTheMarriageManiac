@@ -34,19 +34,19 @@ namespace MarriageManiac.Scenes
         public SchmidScene()
             : base()
         {
-            _CloudTexture = GoofyGame.CONTENT.Load<Texture2D>("cloud_PNG13");
+            _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
             _Schmid = new Schmid(200, 1);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, GoofyGame.CONTENT.Load<Texture2D>("Level1"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
             _LevelSymbol.RotateContiniously(0.1f);
 
-            _Diagram = new DrawableMovable(100, 100, GoofyGame.CONTENT.Load<Texture2D>("klassendiag"));
+            _Diagram = new DrawableMovable(100, 100, ContentStore.LoadImage("klassendiag"));
             _Diagram.RotateContiniously(0.01f);
             _Diagram.TargetReached += (obj, arg) => { _Diagram.Position = new Vector2(0, 0); };
             _Diagram.MoveToTarget(1000, 700, 0.1f);
@@ -98,7 +98,7 @@ namespace MarriageManiac.Scenes
             {
                 Remove(_Answer);
 
-                Texture2D texture = GoofyGame.CONTENT.Load<Texture2D>("Brick_Block");
+                Texture2D texture = ContentStore.LoadImage("Brick_Block");
 
                 var co1 = new CollisionObject(new Rectangle(300, 520, 20, 20)) { CurrentImage = texture };
                 var co2 = new CollisionObject(new Rectangle(400, 480, 20, 20)) { CurrentImage = texture };

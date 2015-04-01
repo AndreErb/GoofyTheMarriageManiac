@@ -11,7 +11,7 @@ namespace MarriageManiac.GameObjects
     class PryBarShot : DrawableMovableCollidable, IGameContent, IHurt
     {
         public PryBarShot(Ufo shooter)
-            : base(shooter.Bounds.Right, shooter.Bounds.Top, GoofyGame.CONTENT.Load<Texture2D>("Brecheisen"))
+            : base(shooter.Bounds.Right, shooter.Bounds.Top, ContentStore.LoadImage("Brecheisen"))
         {
             Ufo = shooter;
             Visible = false;
