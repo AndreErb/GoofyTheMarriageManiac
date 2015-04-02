@@ -55,7 +55,7 @@ namespace MarriageManiac.Core
             return wouldCollideWith;
         }
         
-        public bool CollidesWith(Rectangle bounds)
+        public virtual bool CollidesWith(Rectangle bounds)
         {
             if (CanCollide)
             {

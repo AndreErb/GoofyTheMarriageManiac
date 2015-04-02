@@ -86,6 +86,11 @@ namespace MarriageManiac
                 Ended(this, new EventArgs());
             }
         }
+
+        public virtual void Load()
+        {
+            // Should be overwritten in sub classes!
+        }
         
         public virtual void Start()
         {

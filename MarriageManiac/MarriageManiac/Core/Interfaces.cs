@@ -14,6 +14,7 @@ namespace MarriageManiac.Core
         List<IDrawable> DrawableObjects { get; }
         Level Level { get; set; }
         Color BackColor { get; set; }
+        void Load();
         void Start();
         void Stop();
         void Update(GameTime gameTime);

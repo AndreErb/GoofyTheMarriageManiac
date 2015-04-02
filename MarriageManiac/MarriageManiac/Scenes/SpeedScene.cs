@@ -24,8 +24,11 @@ namespace MarriageManiac.Scenes
         Counter _Counter;
         const double COUNTER_SECONDS = 45;
 
-        public SpeedScene()
-            : base()
+        public SpeedScene() : base()
+        {
+        }
+
+        public override void Load()
         {
             var music = SoundStore.Create("PacmanMusic");
             music.Pitch = -0.4f;
@@ -39,6 +42,7 @@ namespace MarriageManiac.Scenes
             _Goofy = new Goofy(750, 60);
             _Goofy.Lifes = 2;
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
+            _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
             _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
@@ -60,8 +64,8 @@ namespace MarriageManiac.Scenes
 
             var gate = new WoodenGate(860, 25);
 
-            DrawableObjects.Add(gate);
             DrawableObjects.Add(_LevelSymbol);
+            DrawableObjects.Add(gate);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Goofy);
@@ -72,7 +76,7 @@ namespace MarriageManiac.Scenes
             CollidableObjects.Add(_Goofy);
             CollidableObjects.Add(gate);
         }
-      
+              
         public override void Update(GameTime gameTime)
         {
             if (_LevelSymbolShown)
@@ -131,6 +135,14 @@ namespace MarriageManiac.Scenes
                 _Goofy.IsRemoteControlled = true;
                 _Goofy.Die();
                 _LifeText.Text = " X " + _Goofy.Lifes;
+            }
+        }
+
+        void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)
+        {
+            if (e.WouldCollideWith is WoodenGate)
+            {
+                OnEnd();
             }
         }
     }
