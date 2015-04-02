@@ -12,7 +12,6 @@ namespace MarriageManiac.Core
     {
         List<ICollidable> CollidableObjects { get; }
         List<IDrawable> DrawableObjects { get; }
-        List<IDrawableText> DrawableTexts { get; }
         Level Level { get; set; }
         Color BackColor { get; set; }
         void Start();

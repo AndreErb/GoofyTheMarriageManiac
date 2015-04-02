@@ -57,8 +57,8 @@ namespace MarriageManiac.Scenes
             _PanzerknackerGroup = new PanzerknackerGroup(850, 660);
             _PanzerknackerGroup.Visible = false;
             _PanzerknackerGroup.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_PanzerknackerGroup_WouldCollideWith);
-
-            DrawableTexts.Add(_Text);
+                        
+            DrawableObjects.Add(_Text);
             DrawableObjects.Add(_Sun);
             DrawableObjects.Add(new Cloud(150, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(new Cloud(300, 60, _CloudTexture, 0.7f));

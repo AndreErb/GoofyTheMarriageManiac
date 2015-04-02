@@ -128,10 +128,12 @@
     <Compile Include="Core\Rectangles\SolidRectangle.cs" />
     <Compile Include="Core\Rotation.cs" />
     <Compile Include="Core\SoundEngine.cs" />
+    <Compile Include="GameObjects\Counter.cs" />
     <Compile Include="GameObjects\Cloud.cs" />
     <Compile Include="GameObjects\Explosion.cs" />
     <Compile Include="GameObjects\Flash.cs" />
     <Compile Include="GameObjects\GameOverSymbol.cs" />
+    <Compile Include="GameObjects\WoodenGate.cs" />
     <Compile Include="GameObjects\GoofyIcon.cs" />
     <Compile Include="GameObjects\LoveShot.cs" />
     <Compile Include="GameObjects\PryBarShot.cs" />

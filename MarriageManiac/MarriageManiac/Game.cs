@@ -26,7 +26,7 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
-        int _LevelIndex = 5;
+        int _LevelIndex = 1;
         
         public GoofyGame()
         {
@@ -154,7 +154,6 @@ namespace MarriageManiac
             GraphicsDevice.Clear(_Level.Scene.BackColor);
 
             //_SpriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
-
             _SpriteBatch.Begin();
 
             #region Rotation Verständnis-Hilfe
@@ -187,11 +186,6 @@ namespace MarriageManiac
             for (int i = 0; i < _Level.Scene.DrawableObjects.Count(); i++)
             {
                 _Level.Scene.DrawableObjects.ElementAt(i).Draw(_SpriteBatch);
-            }
-
-            for (int i = 0; i < _Level.Scene.DrawableTexts.Count(); i++)
-            {
-                _Level.Scene.DrawableTexts.ElementAt(i).Draw(_SpriteBatch);
             }
 
             _SpriteBatch.End();

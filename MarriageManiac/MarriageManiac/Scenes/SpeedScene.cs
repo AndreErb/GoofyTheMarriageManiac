@@ -18,10 +18,11 @@ namespace MarriageManiac.Scenes
         TimeSpan _LevelSymbolShowTime = new TimeSpan();
         DrawableMovable _LevelSymbol = null;
         Text _Explanation = null;
-        bool _ExplanationShown = false;
         FillableRectangle _GoofyLifeBar;
         const int _LifeBarWidth = 400;
         Text _LifeText;
+        Counter _Counter;
+        const double COUNTER_SECONDS = 45;
 
         public SpeedScene()
             : base()
@@ -34,7 +35,9 @@ namespace MarriageManiac.Scenes
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660);
+            //_Goofy = new Goofy(10, 660);
+            _Goofy = new Goofy(750, 60);
+            _Goofy.Lifes = 2;
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
 
             _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
@@ -51,16 +54,25 @@ namespace MarriageManiac.Scenes
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
             _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
 
+            var countDown = TimeSpan.FromSeconds(COUNTER_SECONDS);
+            _Counter = new Counter(countDown, _GoofyLifeBar.Bounds.X + 180, _GoofyLifeBar.Bounds.Y, Color.Gold);
+            _Counter.TimeChanged += new EventHandler<TimeChangedEventArgs>(Counter_TimeChanged);
+
+            var gate = new WoodenGate(860, 25);
+
+            DrawableObjects.Add(gate);
             DrawableObjects.Add(_LevelSymbol);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Goofy);
             DrawableObjects.Add(goofyIcon);
             DrawableObjects.Add(_GoofyLifeBar);
+            DrawableObjects.Add(_Counter);
             DrawableObjects.Add(_LifeText);
             CollidableObjects.Add(_Goofy);
+            CollidableObjects.Add(gate);
         }
-        
+      
         public override void Update(GameTime gameTime)
         {
             if (_LevelSymbolShown)
@@ -82,12 +94,14 @@ namespace MarriageManiac.Scenes
         {
             KeyboardState keyboard = Keyboard.GetState();
 
-            if (keyboard.IsKeyDown(Keys.Enter))
+            if (keyboard.IsKeyDown(Keys.Enter) && Action.IsNotDone("ExplanationClosed"))
             {
                 Remove(_Explanation);
+                Action.SetDone("ExplanationClosed");
+                _Counter.CountDown();
             }
 
-            if (!_ExplanationShown)
+            if (Action.IsNotDone("ExplanationShown"))
             {
                 var text = "Goofy braucht deine Hilfe um Daisy-Dani zu befreien." + Environment.NewLine + Environment.NewLine
                          + "Steurerung:" + Environment.NewLine
@@ -95,11 +109,17 @@ namespace MarriageManiac.Scenes
                          + "Drücke ENTER um fortzufahren.";
                 _Explanation = new Text(230, 180, "Comic", Color.Black, text, "Schriftrolle");
 
-                DrawableTexts.Add(_Explanation);
-                _ExplanationShown = true;
+                DrawableObjects.Add(_Explanation);
+                Action.SetDone("ExplanationShown");
             }
         }
-        
+
+        void Counter_TimeChanged(object sender, TimeChangedEventArgs e)
+        {
+            var restLife = (e.CurrentTime.TotalSeconds / COUNTER_SECONDS) * 100;
+            _Goofy.LifePercentage = (decimal)restLife;
+        }
+
         void _Goofy_LifeAmountChanged(object sender, LifeAmountChangedArgs e)
         {
             _GoofyLifeBar.FillPercentage = e.CurrentLifePercentage;
@@ -107,7 +127,8 @@ namespace MarriageManiac.Scenes
             if (e.CurrentLifePercentage <= 0 && Action.IsNotDone("GoofyHasDied"))
             {
                 Action.SetDone("GoofyHasDied");
-                
+
+                _Goofy.IsRemoteControlled = true;
                 _Goofy.Die();
                 _LifeText.Text = " X " + _Goofy.Lifes;
             }

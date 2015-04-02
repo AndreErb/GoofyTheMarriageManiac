@@ -121,7 +121,7 @@ namespace MarriageManiac.Scenes
                 _Answer = new Text(230, 400, "Comic", Color.Black,
                                         "sauba alta, weiter gehts..." + Environment.NewLine + "Drücke Enter zum fortfahren!",
                                         "Schriftrolle");
-                DrawableTexts.Add(_Answer);
+                DrawableObjects.Add(_Answer);
                 _AnswerShown = true;
                 _RightAnswer = true;
             }
@@ -132,7 +132,7 @@ namespace MarriageManiac.Scenes
                 _Answer = new Text(230, 400, "Comic", Color.Black,
                     "dumpfknödel, mann, mann, mann" + Environment.NewLine + "Drücke Enter zum fortfahren!",
                     "Schriftrolle");
-                DrawableTexts.Add(_Answer);
+                DrawableObjects.Add(_Answer);
                 _AnswerShown = true;
                 _QuestionShown = false;
             }
@@ -154,7 +154,7 @@ namespace MarriageManiac.Scenes
                          + "Drücke den entsprechenden Buchstaben auf der Tastatur!";
                 _Question = new Text(230, 180, "Comic", Color.Black, text, "Schriftrolle");
 
-                DrawableTexts.Add(_Question);
+                DrawableObjects.Add(_Question);
                 _QuestionShown = true;
             }
         }

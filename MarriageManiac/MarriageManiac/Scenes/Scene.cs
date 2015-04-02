@@ -18,7 +18,6 @@ namespace MarriageManiac
         {
             CollidableObjects = new List<ICollidable>();
             DrawableObjects = new List<MarriageManiac.Core.IDrawable>();
-            DrawableTexts = new List<IDrawableText>();
             BackColor = Color.CornflowerBlue;
             Started = true;
             Action = new ActionStore();
@@ -27,7 +26,6 @@ namespace MarriageManiac
 
         public List<ICollidable> CollidableObjects { get; private set; }
         public List<MarriageManiac.Core.IDrawable> DrawableObjects { get; private set; }
-        public List<IDrawableText> DrawableTexts { get; private set; }
         public Level Level { get; set; }
         public Color BackColor { get; set; }
         public virtual event EventHandler Ended;
@@ -37,12 +35,6 @@ namespace MarriageManiac
 
         public virtual void Update(GameTime gameTime)
         {
-            for (int i = 0; i < DrawableTexts.Count(); i++)
-            {
-                var text = DrawableTexts.ElementAt(i);
-                text.Update(gameTime);
-            }
-
             if (Started)
             {
                 for (int i = 0; i < CollidableObjects.Count(); i++)
@@ -74,11 +66,6 @@ namespace MarriageManiac
         public void Remove(MarriageManiac.Core.IDrawable content)
         {
             DrawableObjects.Remove(content);
-        }
-
-        public void Remove(IDrawableText text)
-        {
-            DrawableTexts.Remove(text);
         }
 
         public void Clear(bool reloadLevel)
