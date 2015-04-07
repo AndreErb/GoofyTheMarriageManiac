@@ -33,7 +33,7 @@ namespace MarriageManiac
             GRAPHICS = new GraphicsDeviceManager(this);
             GRAPHICS.PreferredBackBufferWidth = SCREENWIDTH;
             GRAPHICS.PreferredBackBufferHeight = SCREENHEIGHT;
-
+            
             Content.RootDirectory = "Content";
             CONTENT = Content;
         }
@@ -134,6 +134,11 @@ namespace MarriageManiac
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.F12))
+            {
+                GRAPHICS.ToggleFullScreen();
+            }
+
             var loadNextLevel = false;
             if (loadNextLevel)
             {
@@ -153,8 +158,14 @@ namespace MarriageManiac
         {
             GraphicsDevice.Clear(_Level.Scene.BackColor);
 
-            //_SpriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
-            _SpriteBatch.Begin();
+            float horScaling = (float)GRAPHICS.GraphicsDevice.PresentationParameters.BackBufferWidth / (float)SCREENWIDTH;
+            float verScaling = (float)GRAPHICS.GraphicsDevice.PresentationParameters.BackBufferHeight / (float)SCREENHEIGHT;
+            Vector3 screenScalingFactor = new Vector3(horScaling, verScaling, 1);
+
+            Matrix globalTransformation = Matrix.CreateScale(screenScalingFactor);
+
+            _SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone, null, globalTransformation);                        
+            //_SpriteBatch.Begin();
 
             #region Rotation Verständnis-Hilfe
 
