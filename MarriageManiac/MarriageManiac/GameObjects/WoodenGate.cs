@@ -20,7 +20,7 @@ namespace MarriageManiac.GameObjects
             if (CanCollide)
             {
                 // We fake the X position, so that Goofy can walk into the middle of the gate, until he collides.
-                var fakeBounds = new Rectangle(Bounds.X + 100, Bounds.Y, Bounds.Width, Bounds.Height);
+                var fakeBounds = new Rectangle(Bounds.X + (Bounds.Width / 2), Bounds.Y, 1, Bounds.Height);
                 return bounds.Intersects(fakeBounds);
             }
             else
