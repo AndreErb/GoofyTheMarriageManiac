@@ -128,6 +128,7 @@
     <Compile Include="Core\Rectangles\SolidRectangle.cs" />
     <Compile Include="Core\Rotation.cs" />
     <Compile Include="Core\SoundEngine.cs" />
+    <Compile Include="GameObjects\Clock.cs" />
     <Compile Include="GameObjects\Counter.cs" />
     <Compile Include="GameObjects\Cloud.cs" />
     <Compile Include="GameObjects\Explosion.cs" />

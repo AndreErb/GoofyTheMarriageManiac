@@ -24,6 +24,7 @@ namespace MarriageManiac.Scenes
         const int _LifeBarWidth = 400;
         Text _LifeText;
         Counter _Counter;
+        Clock _Clock;
         const double COUNTER_SECONDS = 45;
 
         public SpeedScene() : base()
@@ -64,18 +65,18 @@ namespace MarriageManiac.Scenes
             _Counter.TimeChanged += new EventHandler<TimeChangedEventArgs>(Counter_TimeChanged);
 
             var gate = new WoodenGate(860, 25);
+            _Clock = new Clock(10, 150);
 
+            Add(_Goofy);
+            Add(gate);
+            Add(_Clock);
             DrawableObjects.Add(_LevelSymbol);
-            DrawableObjects.Add(gate);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
-            DrawableObjects.Add(_Goofy);
             DrawableObjects.Add(goofyIcon);
             DrawableObjects.Add(_GoofyLifeBar);
             DrawableObjects.Add(_Counter);
-            DrawableObjects.Add(_LifeText);
-            CollidableObjects.Add(_Goofy);
-            CollidableObjects.Add(gate);
+            DrawableObjects.Add(_LifeText);            
         }
               
         public override void Update(GameTime gameTime)
@@ -86,7 +87,7 @@ namespace MarriageManiac.Scenes
 
                 if (_LevelSymbolShowTime > TimeSpan.FromSeconds(1.5))
                 {
-                    DrawableObjects.Remove(_LevelSymbol);
+                    Remove(_LevelSymbol);
                     ShowExplanation();
                 }
             }
@@ -173,7 +174,13 @@ namespace MarriageManiac.Scenes
 
         void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)
         {
-            if (e.WouldCollideWith is WoodenGate)
+            if (e.WouldCollideWith is Clock)
+            {
+                // Donate Goofy a little bit more time, for collecting the clock.
+                Remove(_Clock);
+                _Counter.AddTime(TimeSpan.FromSeconds(15));
+            }
+            else if (e.WouldCollideWith is WoodenGate)
             {
                 OnEnd();
             }

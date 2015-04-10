@@ -34,7 +34,8 @@ namespace MarriageManiac.GameObjects
         }
 
         public event EventHandler<TimeChangedEventArgs> TimeChanged;
-        public event EventHandler CountDownFinished;        
+        public event EventHandler CountDownFinished;
+        private DateTime StartTime { get; set; }
         private TimeSpan InitialTime { get; set; }
 
         public virtual TimeSpan CurrentTime
@@ -45,6 +46,11 @@ namespace MarriageManiac.GameObjects
                 _CurrentTime = value;
                 OnTimeChanged(this, value);
             }
+        }
+
+        public void AddTime(TimeSpan time)
+        {
+            StartTime = StartTime.Add(time);
         }
 
         public void Reset()
@@ -60,12 +66,12 @@ namespace MarriageManiac.GameObjects
 
         public void CountDownFrom(TimeSpan countDown)
         {
-            var startTime = DateTime.Now;
+            StartTime = DateTime.Now;
 
             var timer = new Timer(500);
             timer.Elapsed += (sender, e) =>
             {
-                var elapsed = e.SignalTime - startTime;
+                var elapsed = e.SignalTime - StartTime;
                 CurrentTime = countDown - elapsed;
 
                 Text = CurrentTime.ToString(@"mm\:ss");
