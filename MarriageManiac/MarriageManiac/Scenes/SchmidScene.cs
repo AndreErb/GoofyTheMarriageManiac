@@ -31,8 +31,10 @@ namespace MarriageManiac.Scenes
         const int _LifeBarWidth = 400;
         Text _LifeText;
 
-        public SchmidScene()
-            : base()
+        public SchmidScene() : base()
+        {}
+
+        public override void Load()
         {
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
@@ -40,7 +42,7 @@ namespace MarriageManiac.Scenes
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
             _Schmid = new Schmid(200, 1);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level3"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
@@ -58,8 +60,7 @@ namespace MarriageManiac.Scenes
             goofyIcon.Position = new Vector2(screenMiddle - distanceFromMiddle - goofyIcon.Bounds.Width, 10);
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
             _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
-
-            DrawableObjects.Add(_LevelSymbol);
+                        
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Diagram);
@@ -70,6 +71,7 @@ namespace MarriageManiac.Scenes
             DrawableObjects.Add(_LifeText);
             CollidableObjects.Add(_Goofy);
             CollidableObjects.Add(_Schmid);
+            DrawableObjects.Add(_LevelSymbol);
         }
 
         void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)

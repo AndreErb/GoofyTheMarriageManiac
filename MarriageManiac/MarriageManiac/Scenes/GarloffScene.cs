@@ -21,15 +21,17 @@ namespace MarriageManiac.Scenes
         const int _LifeBarWidth = 400;
         Text _LifeText;
 
-        public GarloffScene()
-            : base()
+        public GarloffScene() : base()
+        {}
+
+        public override void Load()
         {
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level4"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
@@ -43,7 +45,6 @@ namespace MarriageManiac.Scenes
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
             _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
 
-            DrawableObjects.Add(_LevelSymbol);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Goofy);
@@ -51,6 +52,7 @@ namespace MarriageManiac.Scenes
             DrawableObjects.Add(_GoofyLifeBar);
             DrawableObjects.Add(_LifeText);
             CollidableObjects.Add(_Goofy);
+            DrawableObjects.Add(_LevelSymbol);
         }
         
         public override void Update(GameTime gameTime)

@@ -28,8 +28,7 @@ namespace MarriageManiac.Scenes
         const double COUNTER_SECONDS = 45;
 
         public SpeedScene() : base()
-        {
-        }
+        {}
 
         public override void Load()
         {
