@@ -7,6 +7,8 @@ using MarriageManiac.Characters;
 using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
 using MarriageManiac.Core.Rectangles;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace MarriageManiac.Scenes
 {
@@ -38,8 +40,7 @@ namespace MarriageManiac.Scenes
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            //_Goofy = new Goofy(10, 660);
-            _Goofy = new Goofy(750, 60);
+            _Goofy = new Goofy(10, 660);
             _Goofy.Lifes = 2;
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
@@ -107,9 +108,11 @@ namespace MarriageManiac.Scenes
 
             if (Action.IsNotDone("ExplanationShown"))
             {
-                var text = "Goofy braucht deine Hilfe um Daisy-Dani zu befreien." + Environment.NewLine + Environment.NewLine
+                var text = "Goofy braucht deine Hilfe um Daisy-Dani zu befreien." + Environment.NewLine + Environment.NewLine + Environment.NewLine
                          + "Steurerung:" + Environment.NewLine
-                         + "Links: <    Rechts: >    Springen: Leertaste" + Environment.NewLine + Environment.NewLine
+                         + "Links:   <- (Pfeil links) " + Environment.NewLine
+                         + "Rechts: -> (Pfeil rechts)" + Environment.NewLine
+                         + "Springen: Leertaste" + Environment.NewLine + Environment.NewLine + Environment.NewLine
                          + "Drücke ENTER um fortzufahren.";
                 _Explanation = new Text(230, 180, "Comic", Color.Black, text, "Schriftrolle");
 
@@ -130,12 +133,42 @@ namespace MarriageManiac.Scenes
 
             if (e.CurrentLifePercentage <= 0 && Action.IsNotDone("GoofyHasDied"))
             {
-                Action.SetDone("GoofyHasDied");
-
-                _Goofy.IsRemoteControlled = true;
-                _Goofy.Die();
-                _LifeText.Text = " X " + _Goofy.Lifes;
+                if (_Goofy.Lifes > 0)
+                {
+                    LetGoofyDieAndRevive();
+                }
+                else
+                {
+                    GameOver();
+                }
             }
+        }
+        
+        private void LetGoofyDieAndRevive()
+        {
+            Action.SetDone("GoofyHasDied");
+
+            _Goofy.IsRemoteControlled = true;
+            _Goofy.Die();
+            _LifeText.Text = " X " + _Goofy.Lifes;
+
+            Timer timer = null;
+
+            TimerCallback reviveGoofy = _ =>
+            {
+                _Goofy.ReviveAt(10, 660);
+                _Goofy.IsRemoteControlled = false;
+                timer.Dispose();
+
+                Action.Delete("GoofyHasDied");
+
+                _Counter.Reset();
+                _Counter.CountDown();
+            };
+
+            // Revive Goofy after 1,5 secs
+            timer = new Timer(reviveGoofy);
+            timer.Change(1500, 0);
         }
 
         void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)

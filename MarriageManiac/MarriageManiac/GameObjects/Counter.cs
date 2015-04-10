@@ -23,14 +23,14 @@ namespace MarriageManiac.GameObjects
         {
             if (time != null)
             {
-                CurrentTime = InitialTime = time;
+                 InitialTime = time;
             }
             else
             {
-                CurrentTime = InitialTime = TimeSpan.Zero;
+                InitialTime = TimeSpan.Zero;
             }
 
-            Text = CurrentTime.ToString(@"mm\:ss");
+            Reset();
         }
 
         public event EventHandler<TimeChangedEventArgs> TimeChanged;
@@ -45,6 +45,12 @@ namespace MarriageManiac.GameObjects
                 _CurrentTime = value;
                 OnTimeChanged(this, value);
             }
+        }
+
+        public void Reset()
+        {
+            CurrentTime = InitialTime;
+            Text = CurrentTime.ToString(@"mm\:ss");
         }
 
         public void CountDown()
