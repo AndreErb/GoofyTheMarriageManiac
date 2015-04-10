@@ -110,9 +110,11 @@ namespace MarriageManiac.Scenes
             {
                 var text = "Goofy braucht deine Hilfe um Daisy-Dani zu befreien." + Environment.NewLine + Environment.NewLine + Environment.NewLine
                          + "Steurerung:" + Environment.NewLine
-                         + "Links:   <- (Pfeil links) " + Environment.NewLine
-                         + "Rechts: -> (Pfeil rechts)" + Environment.NewLine
-                         + "Springen: Leertaste" + Environment.NewLine + Environment.NewLine + Environment.NewLine
+                         + "Links:              Pfeil links" + Environment.NewLine
+                         + "Rechts:            Pfeil rechts" + Environment.NewLine
+                         + "Springen:         Leertaste" + Environment.NewLine 
+                         + "Schießen:         X" + Environment.NewLine
+                         + "Vollbild an/aus: F12" + Environment.NewLine + Environment.NewLine + Environment.NewLine
                          + "Drücke ENTER um fortzufahren.";
                 _Explanation = new Text(230, 180, "Comic", Color.Black, text, "Schriftrolle");
 
@@ -181,6 +183,7 @@ namespace MarriageManiac.Scenes
             }
             else if (e.WouldCollideWith is WoodenGate)
             {
+                SoundStore.Sound("PacmanMusic").Stop();
                 OnEnd();
             }
         }
