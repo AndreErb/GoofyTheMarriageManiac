@@ -108,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Characters\CharacterBase.cs" />
+    <Compile Include="Characters\Dagobert.cs" />
+    <Compile Include="Characters\TickTrickTrack.cs" />
+    <Compile Include="Characters\Mickey.cs" />
+    <Compile Include="Characters\Mini.cs" />
     <Compile Include="Characters\Daisy.cs" />
     <Compile Include="Characters\Garloff.cs" />
     <Compile Include="Characters\Goofy.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="GameObjects\Explosion.cs" />
     <Compile Include="GameObjects\Flash.cs" />
     <Compile Include="GameObjects\GameOverSymbol.cs" />
+    <Compile Include="GameObjects\LoveExplosion.cs" />
     <Compile Include="GameObjects\WoodenGate.cs" />
     <Compile Include="GameObjects\GoofyIcon.cs" />
     <Compile Include="GameObjects\LoveShot.cs" />

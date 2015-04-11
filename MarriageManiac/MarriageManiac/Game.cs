@@ -26,7 +26,7 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
-        int _LevelIndex = 0;
+        int _LevelIndex = 6;
         
         public GoofyGame()
         {
