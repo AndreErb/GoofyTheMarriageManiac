@@ -26,7 +26,7 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
-        int _LevelIndex = 1;
+        int _LevelIndex = 0;
         
         public GoofyGame()
         {
@@ -109,6 +109,11 @@ namespace MarriageManiac
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
+                    case 6: // Hochzeitsszene
+                        scene = new MarriageScene();
+                        scene.Ended += new EventHandler(scene_Ended);
+                        _Level = new Level(scene, levelFile);
+                        break;
                 }
 
                 if (_Level != null)
@@ -137,12 +142,6 @@ namespace MarriageManiac
             if (Keyboard.GetState().IsKeyDown(Keys.F12))
             {
                 GRAPHICS.ToggleFullScreen();
-            }
-
-            var loadNextLevel = false;
-            if (loadNextLevel)
-            {
-                LoadLevel(_LevelIndex);
             }
 
             _Level.Update(gameTime);

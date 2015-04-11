@@ -36,6 +36,7 @@ namespace MarriageManiac
         Texture2D _CurrentImage = null;
         Rectangle _Bounds;
         decimal _LifePercentage;
+        DrawableMovable _TargetMovement;
 
         public CharacterBase()
         {
@@ -54,7 +55,7 @@ namespace MarriageManiac
         
         public event EventHandler<LifeAmountChangedArgs> LifeAmountChanged; 
         public event EventHandler<WouldCollideEventArgs> WouldCollideWith;
-        
+        public event EventHandler<MovingEventArgs> Moved;
 
         public Direction Direction { get; private set; }
         public Direction ViewDirection { get; protected set; }
@@ -79,6 +80,7 @@ namespace MarriageManiac
             get { return _CurrentImage; }
             set
             {
+                Bounds = new Rectangle(Bounds.X, Bounds.Y, value.Width, value.Height);
                 _CurrentImage = value;
             }
         }
@@ -112,7 +114,16 @@ namespace MarriageManiac
         {
             CheckHurt(scene);
             Jump(scene.CollidableObjects);
-            Move(scene.CollidableObjects);
+
+            if (_TargetMovement != null)
+            {
+                _TargetMovement.Update(gameTime);
+            }
+            else
+            {
+                Move(scene.CollidableObjects);
+            }
+            
             Fall(scene.CollidableObjects);
         }
         
@@ -120,10 +131,25 @@ namespace MarriageManiac
         {
             JumpMode = mode;
         }
+        
+        public virtual void MoveToTarget(float targetX, float targetY, float speed)
+        {
+            _TargetMovement = new DrawableMovable((int)Position.X, (int)Position.Y, null);
+
+            _TargetMovement.Moved += (obj, e) =>
+            {
+                _Bounds.X = (int)e.Position.X;
+                _Bounds.Y = (int)e.Position.Y;
+                OnMoved();
+            };
+
+            _TargetMovement.MoveToTarget(targetX, targetY, speed);
+        }
 
         public virtual void Move(Direction direction)
         {
             Direction = direction;
+            _TargetMovement = null;
 
             if (direction == Direction.Left || direction == Direction.Right)
             {
@@ -329,6 +355,14 @@ namespace MarriageManiac
             if (LifeAmountChanged != null)
             {
                 LifeAmountChanged(this, new LifeAmountChangedArgs(currentLifePercentage));
+            }
+        }
+
+        protected virtual void OnMoved()
+        {
+            if (Moved != null)
+            {
+                Moved(this, new MovingEventArgs(Position));
             }
         }
     }

@@ -24,6 +24,7 @@ namespace MarriageManiac.Core
 
         public Vector2 TargetPosition { get; protected set; }
         public float Speed { get; protected set; }
+        public event EventHandler<MovingEventArgs> Moved;
         public event EventHandler TargetReached;
         private MoveMode Mode { get; set; }
         private Vector2 DirectionVector { get; set; }
@@ -88,10 +89,11 @@ namespace MarriageManiac.Core
                 }
 
                 Position = nextPosition;
+                OnMoved();
             }
             else
             {
-                RaiseTargetReached();
+                OnTargetReached();
             }
         }
 
@@ -107,6 +109,7 @@ namespace MarriageManiac.Core
             }
 
             Position = Position + DirectionVector * Speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            OnMoved();
         }
 
 
@@ -147,13 +150,31 @@ namespace MarriageManiac.Core
             }
         }
 
+        protected virtual void OnMoved()
+        {
+            if (Moved != null)
+            {
+                Moved(this, new MovingEventArgs(Position));
+            }
+        }
 
-        protected virtual void RaiseTargetReached()
+        protected virtual void OnTargetReached()
         {
             if (TargetReached != null)
             {
                 TargetReached(this, new EventArgs());
             }
         }
+    }
+
+
+    public class MovingEventArgs : EventArgs
+    {
+        public MovingEventArgs(Vector2 position)
+        {
+            Position = position;
+        }
+
+        public Vector2 Position { get; set; } 
     }
 }

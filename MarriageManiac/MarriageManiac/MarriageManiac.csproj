@@ -140,6 +140,7 @@
     <Compile Include="GameObjects\PryBarShot.cs" />
     <Compile Include="GameObjects\Ufo.cs" />
     <Compile Include="GameObjects\UfoIcon.cs" />
+    <Compile Include="Scenes\MarriageScene.cs" />
     <Compile Include="Scenes\GarloffScene.cs" />
     <Compile Include="Scenes\PfadfinderScene.cs" />
     <Compile Include="Scenes\FinalScene.cs" />
@@ -158,6 +159,9 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Levels\Level6.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Levels\Level4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
