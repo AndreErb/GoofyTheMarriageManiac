@@ -111,8 +111,11 @@ namespace MarriageManiac.Scenes
                 Action.SetDone("MovingCouple");
 
                 SoundStore.Sound("ChurchBell").Instance.Stop();
-                var weddingSound = SoundStore.Create("WeddingMarch");
+                var weddingSound = SoundStore.Create("WeddingMarch");                
                 weddingSound.Instance.Play();
+
+                // End the scene, when the music stops.
+                new Timer(_ => OnEnd()).Change(weddingSound.Duration, TimeSpan.Zero);
 
                 _Goofy.AllowFall = false;
                 _Goofy.CanCollide = false;
