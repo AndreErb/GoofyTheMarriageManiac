@@ -30,8 +30,8 @@ namespace MarriageManiac.Scenes
         {
             // Create and play the background music.
             var music = SoundStore.Create("KissMusic", "Kiss_The_Girl");
-            music.IsLooped = true;
-            music.Play();
+            music.Instance.IsLooped = true;
+            music.Instance.Play();
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
@@ -79,7 +79,7 @@ namespace MarriageManiac.Scenes
                 //If we have returned to the right wall.
                 Remove(_Goofy);
 
-                SoundStore.Sound("HorrorMusic").Stop();
+                SoundStore.Sound("HorrorMusic").Instance.Stop();
                 OnEnd();
             }
         }
@@ -116,11 +116,11 @@ namespace MarriageManiac.Scenes
             if (_Elapsed >= TimeSpan.FromSeconds(1.5) && !_Started && Action.IsNotDone("PanzerknackerAttack"))
             {
                 Action.SetDone("PanzerknackerAttack");
-                SoundStore.Sound("KissMusic").Stop();
+                SoundStore.Sound("KissMusic").Instance.Stop();
                 var horrorMusic = SoundStore.Create("HorrorMusic", "Haunted_Mansion");
-                horrorMusic.IsLooped = true;
-                horrorMusic.Pitch = 0.5f;
-                horrorMusic.Play();
+                horrorMusic.Instance.IsLooped = true;
+                horrorMusic.Instance.Pitch = 0.5f;
+                horrorMusic.Instance.Play();
 
                 Remove(_Text);
                 Remove(_Sun);

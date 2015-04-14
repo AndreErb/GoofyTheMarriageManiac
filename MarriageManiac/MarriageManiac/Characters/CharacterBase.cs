@@ -47,7 +47,7 @@ namespace MarriageManiac
             Visible = true;
             CanCollide = true;
             Origin = new Vector2();
-            SoundStore = new SoundEngine();
+            SoundStore = new SoundStore();
             AllowFall = true;
             LifePercentage = 100;
             InitSounds();
@@ -63,7 +63,7 @@ namespace MarriageManiac
         public bool Visible { get; set; }
         public bool CanCollide { get; set; }
         public bool AllowFall { get; set; }
-        protected SoundEngine SoundStore { get; private set; }
+        protected SoundStore SoundStore { get; private set; }
 
         public virtual decimal LifePercentage
         {
@@ -160,7 +160,7 @@ namespace MarriageManiac
         private void InitSounds()
         {
             var jump = SoundStore.Create("Jump");
-            jump.Volume = 0.1f;
+            jump.Instance.Volume = 0.1f;
         }
 
                 
@@ -256,7 +256,7 @@ namespace MarriageManiac
                 {
                     _Velocity.Y = -25;
                     jumping = true;
-                    SoundStore.Sound("Jump").Play();
+                    SoundStore.Sound("Jump").Instance.Play();
                 }
 
                 if (jumping)
@@ -270,7 +270,7 @@ namespace MarriageManiac
                     }
                     else if (collision.Bounds.Bottom > Bounds.Y) // Prevents jumping onto bricks, which are far above the character.
                     {
-                        SoundStore.Sound("Jump").Stop();
+                        SoundStore.Sound("Jump").Instance.Stop();
                         // Jumped an landed on something.
                         _Bounds.Y = collision.Bounds.Y - Bounds.Height;
                         jumping = false;

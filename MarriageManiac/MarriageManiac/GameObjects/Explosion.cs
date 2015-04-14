@@ -17,9 +17,9 @@ namespace MarriageManiac.GameObjects
         {
             CanCollide = false;
 
-            var explosion = new SoundEngine().Create("SmallExplosion");
-            explosion.Volume = 0.15f;
-            explosion.Play();
+            var explosion = new SoundStore().Create("SmallExplosion");
+            explosion.Instance.Volume = 0.15f;
+            explosion.Instance.Play();
         }
                 
         public override void Update(Scene scene, GameTime gameTime)

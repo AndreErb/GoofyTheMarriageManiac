@@ -47,7 +47,7 @@ namespace MarriageManiac.Characters
 
         public void Laugh()
         {
-            SoundStore.Sound("GoofyLaugh").Play();
+            SoundStore.Sound("GoofyLaugh").Instance.Play();
         }
 
         private void MoveUserControlled(KeyboardState keyboard)

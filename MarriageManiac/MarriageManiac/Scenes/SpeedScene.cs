@@ -33,10 +33,10 @@ namespace MarriageManiac.Scenes
         public override void Load()
         {
             var music = SoundStore.Create("PacmanMusic");
-            music.Pitch = -0.4f;
-            music.Volume = 0.4f;
-            music.IsLooped = true;
-            music.Play();
+            music.Instance.Pitch = -0.4f;
+            music.Instance.Volume = 0.4f;
+            music.Instance.IsLooped = true;
+            music.Instance.Play();
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
@@ -183,7 +183,7 @@ namespace MarriageManiac.Scenes
             }
             else if (e.WouldCollideWith is WoodenGate)
             {
-                SoundStore.Sound("PacmanMusic").Stop();
+                SoundStore.Sound("PacmanMusic").Instance.Stop();
                 OnEnd();
             }
         }

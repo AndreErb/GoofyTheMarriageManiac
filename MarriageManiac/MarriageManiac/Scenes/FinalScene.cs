@@ -36,9 +36,9 @@ namespace MarriageManiac
         public override void Load()
         {
             var horrorMusic = SoundStore.Create("HorrorMusic", "Haunted_Mansion");
-            horrorMusic.IsLooped = true;
-            horrorMusic.Pitch = 0.5f;
-            horrorMusic.Play();
+            horrorMusic.Instance.IsLooped = true;
+            horrorMusic.Instance.Pitch = 0.5f;
+            horrorMusic.Instance.Play();
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
@@ -153,7 +153,7 @@ namespace MarriageManiac
 
             if (e.CurrentLifePercentage <= 0)
             {
-                SoundStore.Sound("HorrorMusic").Stop();
+                SoundStore.Sound("HorrorMusic").Instance.Stop();
                 _Goofy.Laugh();
                 Remove(_Flash);
                 BackColor = Color.CornflowerBlue;

@@ -24,7 +24,7 @@ namespace MarriageManiac.Characters
 
         public void Scream()
         {
-            SoundStore.Sound("FemaleScream").Play();
+            SoundStore.Sound("FemaleScream").Instance.Play();
         }
     }
 }

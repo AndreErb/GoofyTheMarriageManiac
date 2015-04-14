@@ -21,7 +21,7 @@ namespace MarriageManiac
             BackColor = Color.CornflowerBlue;
             Started = true;
             Action = new ActionStore();
-            SoundStore = new SoundEngine();
+            SoundStore = new SoundStore();
         }
 
         public List<ICollidable> CollidableObjects { get; private set; }
@@ -31,7 +31,7 @@ namespace MarriageManiac
         public virtual event EventHandler Ended;
         private bool Started { get; set; }
         protected ActionStore Action { get; private set; }
-        protected SoundEngine SoundStore { get; private set; }
+        protected SoundStore SoundStore { get; private set; }
 
         public virtual void Update(GameTime gameTime)
         {

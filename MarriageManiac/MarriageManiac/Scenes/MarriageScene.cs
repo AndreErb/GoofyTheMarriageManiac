@@ -24,8 +24,8 @@ namespace MarriageManiac.Scenes
         {
             // Create and play the background music.
             var music = SoundStore.Create("ChurchBell");
-            music.IsLooped = true;
-            music.Play();
+            music.Instance.IsLooped = true;
+            music.Instance.Play();
 
             _Goofy = new Goofy(10, 660);
             _Goofy.IsRemoteControlled = true;
@@ -110,9 +110,9 @@ namespace MarriageManiac.Scenes
             {
                 Action.SetDone("MovingCouple");
 
-                SoundStore.Sound("ChurchBell").Stop();
+                SoundStore.Sound("ChurchBell").Instance.Stop();
                 var weddingSound = SoundStore.Create("WeddingMarch");
-                weddingSound.Play();
+                weddingSound.Instance.Play();
 
                 _Goofy.AllowFall = false;
                 _Goofy.CanCollide = false;

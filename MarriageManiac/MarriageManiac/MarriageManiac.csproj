@@ -131,7 +131,8 @@
     <Compile Include="Core\Rectangles\FillableRectangle.cs" />
     <Compile Include="Core\Rectangles\SolidRectangle.cs" />
     <Compile Include="Core\Rotation.cs" />
-    <Compile Include="Core\SoundEngine.cs" />
+    <Compile Include="Core\Sound.cs" />
+    <Compile Include="Core\SoundStore.cs" />
     <Compile Include="GameObjects\Clock.cs" />
     <Compile Include="GameObjects\Counter.cs" />
     <Compile Include="GameObjects\Cloud.cs" />
