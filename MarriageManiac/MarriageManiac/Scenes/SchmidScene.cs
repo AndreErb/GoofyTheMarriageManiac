@@ -11,7 +11,7 @@ using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
 using MarriageManiac.Core.Rectangles;
 
-//hallo dani wie schauts aus siehst das jetzt
+//hallo
 namespace MarriageManiac.Scenes
 {
     public class SchmidScene : Scene
