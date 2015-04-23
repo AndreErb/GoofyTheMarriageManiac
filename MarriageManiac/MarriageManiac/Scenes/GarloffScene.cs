@@ -8,10 +8,14 @@ using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
 using MarriageManiac.Core.Rectangles;
 
+
+//hallo andre
 namespace MarriageManiac.Scenes
 {
     public class GarloffScene : Scene
     {
+        
+
         Goofy _Goofy = null;
         Texture2D _CloudTexture = null;
         private bool _LevelSymbolShown = false;
