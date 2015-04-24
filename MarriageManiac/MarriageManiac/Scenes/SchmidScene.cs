@@ -41,9 +41,9 @@ namespace MarriageManiac.Scenes
 
             _Goofy = new Goofy(10, 660);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
-            _Schmid = new Schmid(200, 1);
+            _Schmid = new Schmid(200, 701);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level3"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level2"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
@@ -61,7 +61,10 @@ namespace MarriageManiac.Scenes
             goofyIcon.Position = new Vector2(screenMiddle - distanceFromMiddle - goofyIcon.Bounds.Width, 10);
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
             _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
-                        
+
+            var gate = new WoodenGate(860, 165);
+            Add(gate);
+
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Diagram);
@@ -112,32 +115,33 @@ namespace MarriageManiac.Scenes
 
             }
 
-            if (!_RightAnswer && keyboard.IsKeyDown(Keys.Enter))
+            if (keyboard.IsKeyDown(Keys.Enter) && Action.IsDone("AnswerShown"))
             {
                 Remove(_Answer);
                 // -1 Leben
             }
 
-            if (keyboard.IsKeyDown(Keys.A) && _AnswerShown == false)
+            if (keyboard.IsKeyDown(Keys.A) && Action.IsNotDone("AnswerShown"))
             {
                 Remove(_Question);
                 _Answer = new Text(230, 400, "Comic", Color.Black,
                                         "sauba alta, weiter gehts..." + Environment.NewLine + "Drücke Enter zum fortfahren!",
                                         "Schriftrolle");
                 DrawableObjects.Add(_Answer);
-                _AnswerShown = true;
+                Action.SetDone("AnswerShown");
                 _RightAnswer = true;
             }
 
-            if ((keyboard.IsKeyDown(Keys.B) || keyboard.IsKeyDown(Keys.C)) && _AnswerShown == false)
+            if ((keyboard.IsKeyDown(Keys.B) || keyboard.IsKeyDown(Keys.C)) && Action.IsNotDone("AnswerShown"))
             {
                 Remove(_Question);
+                Action.Delete("QuestionShown");
+
                 _Answer = new Text(230, 400, "Comic", Color.Black,
                     "dumpfknödel, mann, mann, mann" + Environment.NewLine + "Drücke Enter zum fortfahren!",
                     "Schriftrolle");
                 DrawableObjects.Add(_Answer);
-                _AnswerShown = true;
-                _QuestionShown = false;
+                Action.SetDone("AnswerShown");
             }
 
 
@@ -147,8 +151,7 @@ namespace MarriageManiac.Scenes
 
         private void ShowQuestion()
         {
-
-            if (!_QuestionShown)
+            if (Action.IsNotDone("QuestionShown"))
             {
                 var text = "warum ist die banane krumm?" + Environment.NewLine + Environment.NewLine
                          + "a) deshalb " + Environment.NewLine
@@ -158,7 +161,8 @@ namespace MarriageManiac.Scenes
                 _Question = new Text(230, 180, "Comic", Color.Black, text, "Schriftrolle");
 
                 DrawableObjects.Add(_Question);
-                _QuestionShown = true;
+                Action.SetDone("QuestionShown");
+                Action.Delete("AnswerShown");
             }
         }
 
