@@ -10,6 +10,7 @@ using MarriageManiac.Characters;
 using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
 using MarriageManiac.Core.Rectangles;
+using System.Threading;
 
 //hallo
 namespace MarriageManiac.Scenes
@@ -40,8 +41,10 @@ namespace MarriageManiac.Scenes
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);
+            _Goofy.Lifes = 2;
+            _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
-            _Schmid = new Schmid(200, 701);
+            _Schmid = new Schmid(200, 0);
 
             _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level2"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
@@ -83,6 +86,10 @@ namespace MarriageManiac.Scenes
             if (e.WouldCollideWith as Schmid != null)
             {
                 ShowQuestion();
+            }
+            else if (e.WouldCollideWith is WoodenGate)
+            {
+                OnEnd();
             }
         }
 
@@ -142,6 +149,7 @@ namespace MarriageManiac.Scenes
                     "Schriftrolle");
                 DrawableObjects.Add(_Answer);
                 Action.SetDone("AnswerShown");
+                _Goofy.LifePercentage = 0;
             }
 
 
@@ -166,16 +174,44 @@ namespace MarriageManiac.Scenes
             }
         }
 
+        private void LetGoofyDieAndRevive()
+        {
+            Action.SetDone("GoofyHasDied");
+
+            _Goofy.IsRemoteControlled = true;
+            _Goofy.Die();
+            _LifeText.Text = " X " + _Goofy.Lifes;
+
+            Timer timer = null;
+
+            TimerCallback reviveGoofy = _ =>
+            {
+                _Goofy.ReviveAt(10, 660);
+                _Goofy.IsRemoteControlled = false;
+                timer.Dispose();
+
+                Action.Delete("GoofyHasDied");
+            };
+
+            // Revive Goofy after 1,5 secs
+            timer = new Timer(reviveGoofy);
+            timer.Change(1500, 0);
+        }
+
         void _Goofy_LifeAmountChanged(object sender, LifeAmountChangedArgs e)
         {
             _GoofyLifeBar.FillPercentage = e.CurrentLifePercentage;
 
             if (e.CurrentLifePercentage <= 0 && Action.IsNotDone("GoofyHasDied"))
             {
-                Action.SetDone("GoofyHasDied");
-                
-                _Goofy.Die();
-                _LifeText.Text = " X " + _Goofy.Lifes;
+                if (_Goofy.Lifes > 0)
+                {
+                    LetGoofyDieAndRevive();
+                }
+                else
+                {
+                    GameOver();
+                }
             }
         }
     }
