@@ -34,7 +34,7 @@ namespace MarriageManiac.Scenes
 
             _Snoopy = new Snoopy(500, 600);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level2"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level4"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.

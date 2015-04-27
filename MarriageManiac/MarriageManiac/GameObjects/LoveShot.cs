@@ -65,9 +65,15 @@ namespace MarriageManiac.GameObjects
                             scene.Add(new Explosion(Bounds.X, Bounds.Y - 15));
                         }
 
+                        if (c is Sum)
+                        {
+                            scene.Remove(c as Sum);
+                        }
+
                         base.OnWouldCollideWith(c);
                         break;
                     }
+
                 }
             }
 

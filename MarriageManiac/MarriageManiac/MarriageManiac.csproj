@@ -140,6 +140,8 @@
     <Compile Include="GameObjects\Flash.cs" />
     <Compile Include="GameObjects\GameOverSymbol.cs" />
     <Compile Include="GameObjects\LoveExplosion.cs" />
+    <Compile Include="GameObjects\PiGate.cs" />
+    <Compile Include="GameObjects\Sum.cs" />
     <Compile Include="GameObjects\WoodenGate.cs" />
     <Compile Include="GameObjects\GoofyIcon.cs" />
     <Compile Include="GameObjects\LoveShot.cs" />
@@ -168,7 +170,7 @@
     <Content Include="Levels\Level6.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Levels\Level4.txt">
+    <Content Include="Levels\Level3.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Levels\Level1.txt">
@@ -180,7 +182,7 @@
     <Content Include="Levels\Level0.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Levels\Level3.txt">
+    <Content Include="Levels\Level4.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Levels\Level2.txt">

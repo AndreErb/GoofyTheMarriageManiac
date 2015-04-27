@@ -14,8 +14,8 @@ namespace MarriageManiac.Scenes
 {
     public class GarloffScene : Scene
     {
-        
 
+        Garloff _Garloff = new Garloff(200, 600);
         Goofy _Goofy = null;
         Texture2D _CloudTexture = null;
         private bool _LevelSymbolShown = false;
@@ -33,9 +33,14 @@ namespace MarriageManiac.Scenes
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);
+            _Goofy.Lifes = 1;
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
+            _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
+            
+            
+            _Garloff = new Garloff(600, 0);
 
-            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level4"));
+            _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level3"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
             _LevelSymbol.MoveToTarget(350, 300, 2f);
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
@@ -49,14 +54,31 @@ namespace MarriageManiac.Scenes
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
             _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
 
+            var gate = new PiGate(800, 585);
+            Add(gate);
+
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_Goofy);
             DrawableObjects.Add(goofyIcon);
             DrawableObjects.Add(_GoofyLifeBar);
             DrawableObjects.Add(_LifeText);
+            DrawableObjects.Add(_Garloff);
             CollidableObjects.Add(_Goofy);
+            CollidableObjects.Add(_Garloff);
             DrawableObjects.Add(_LevelSymbol);
+        }
+
+        void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)
+        {
+            if (e.WouldCollideWith as Garloff != null)
+            {
+                //ShowQuestion();
+            }
+            else if (e.WouldCollideWith is PiGate)
+            {
+                OnEnd();
+            }
         }
         
         public override void Update(GameTime gameTime)

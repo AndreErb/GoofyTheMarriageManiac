@@ -26,7 +26,7 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
-        int _LevelIndex = 2;
+        int _LevelIndex = 3;
         
         public GoofyGame()
         {
@@ -89,18 +89,18 @@ namespace MarriageManiac
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
-                    case 2: // Pfadfinder
-                        scene = new PfadfinderScene();
-                        scene.Ended += new EventHandler(scene_Ended);
-                        _Level = new Level(scene, levelFile);
-                        break;
-                    case 3: // Schmid
+                    case 2: // Schmid
                         scene = new SchmidScene();
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
-                    case 4: // Garloff
+                    case 3: // Garloff
                         scene = new GarloffScene();
+                        scene.Ended += new EventHandler(scene_Ended);
+                        _Level = new Level(scene, levelFile);
+                        break;
+                    case 4: // Pfadfinder
+                        scene = new PfadfinderScene();
                         scene.Ended += new EventHandler(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;

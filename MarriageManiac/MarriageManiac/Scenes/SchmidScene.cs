@@ -26,18 +26,20 @@ namespace MarriageManiac.Scenes
         DrawableMovable _Diagram = null;
         Text _Question = null;
         Text _Answer = null;
-        bool _QuestionShown = false;
-        bool _AnswerShown = false;
         bool _RightAnswer = false;
         FillableRectangle _GoofyLifeBar;
         const int _LifeBarWidth = 400;
         Text _LifeText;
+        Sound _RightSound;
+        Sound _WrongSound;
 
         public SchmidScene() : base()
         {}
 
         public override void Load()
         {
+            _RightSound = SoundStore.Create("rightanswer");
+            _WrongSound = SoundStore.Create("wronganswer");
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(10, 660);
@@ -137,6 +139,7 @@ namespace MarriageManiac.Scenes
                 DrawableObjects.Add(_Answer);
                 Action.SetDone("AnswerShown");
                 _RightAnswer = true;
+                _RightSound.Instance.Play();
             }
 
             if ((keyboard.IsKeyDown(Keys.B) || keyboard.IsKeyDown(Keys.C)) && Action.IsNotDone("AnswerShown"))
@@ -150,6 +153,7 @@ namespace MarriageManiac.Scenes
                 DrawableObjects.Add(_Answer);
                 Action.SetDone("AnswerShown");
                 _Goofy.LifePercentage = 0;
+                _WrongSound.Instance.Play();
             }
 
 

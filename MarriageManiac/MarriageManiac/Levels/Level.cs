@@ -8,15 +8,17 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MarriageManiac.Core;
+using MarriageManiac.GameObjects;
 
 namespace MarriageManiac
-{        
+{
     public class Level
     {
         private const int ROWS = GoofyGame.SCREENHEIGHT / BLOCKSIZE;
         private const int COLUMNS = GoofyGame.SCREENWIDTH / BLOCKSIZE;
         private const int BLOCKSIZE = 20;
         private Texture2D _BlockTexture = null;
+        private Texture2D _SumTexture = null;
 
         public Vector2 StartPoint { get; private set; }
         public Vector2 GuestPoint { get; private set; }
@@ -108,7 +110,7 @@ namespace MarriageManiac
 
         private IGameContent GetContent(int x, int y, char symbol)
         {
-            switch (symbol)            
+            switch (symbol)
             {
                 case '#':
                     {
@@ -118,13 +120,16 @@ namespace MarriageManiac
                         }
 
                         var bounds = new Rectangle(x * BLOCKSIZE, y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
-                        return new CollisionObject(bounds) 
+                        return new CollisionObject(bounds)
                         {
                             CurrentImage = _BlockTexture
                         };
                     }
-
-                default: 
+                case 's':
+                    {
+                        return  new Sum(x * BLOCKSIZE, y * BLOCKSIZE);
+                    }
+                default:
                     return null;
             }
         }
