@@ -32,13 +32,13 @@ namespace MarriageManiac.Scenes
         {
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660);
+            _Goofy = new Goofy(350, 660);
             _Goofy.Lifes = 1;
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
-            
-            
-            _Garloff = new Garloff(600, 0);
+
+
+            _Garloff = new Garloff(600, 400);
 
             _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level3"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
