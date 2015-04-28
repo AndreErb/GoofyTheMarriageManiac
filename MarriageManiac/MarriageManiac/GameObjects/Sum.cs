@@ -13,7 +13,7 @@ namespace MarriageManiac.GameObjects
             base(x, y, ContentStore.LoadImage("summe"))
         {
             CanCollide = true;
-
+        
         }
 
         //public override void Update(Scene scene, GameTime gameTime)

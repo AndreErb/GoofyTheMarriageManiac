@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MarriageManiac.Core;
+using MarriageManiac.Characters;
 
 namespace MarriageManiac.GameObjects
 {
@@ -16,6 +17,7 @@ namespace MarriageManiac.GameObjects
             Goofy = shooter;
             Visible = false;
             CanCollide = true;
+            _SoundStore = new SoundStore();
         }
 
         public IGameContent Originator { get { return Goofy; } }
@@ -24,6 +26,8 @@ namespace MarriageManiac.GameObjects
 
         private bool Shot { get; set; }
         private bool Exploded { get; set; }
+
+        private SoundStore _SoundStore = null;
 
         public void Shoot()
         {
@@ -68,6 +72,12 @@ namespace MarriageManiac.GameObjects
                         if (c is Sum)
                         {
                             scene.Remove(c as Sum);
+                        }
+
+                        if (c is Garloff)
+                        {
+                           
+                            _SoundStore.Create("bleibcool").Instance.Play();
                         }
 
                         base.OnWouldCollideWith(c);

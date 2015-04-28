@@ -38,6 +38,10 @@ namespace MarriageManiac.Scenes
 
         public override void Load()
         {
+            var spaceMusic = SoundStore.Create("meer_rauschen");
+            spaceMusic.Instance.IsLooped = true;
+            spaceMusic.Instance.Play();
+
             _RightSound = SoundStore.Create("rightanswer");
             _WrongSound = SoundStore.Create("wronganswer");
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
@@ -121,34 +125,36 @@ namespace MarriageManiac.Scenes
                 DrawableObjects.Add(co2);
                 CollidableObjects.Add(co1);
                 CollidableObjects.Add(co2);
+                Add(new Explosion(300, 520));
+                Add(new Explosion(400, 480));
 
             }
 
             if (keyboard.IsKeyDown(Keys.Enter) && Action.IsDone("AnswerShown"))
             {
                 Remove(_Answer);
-                // -1 Leben
             }
 
             if (keyboard.IsKeyDown(Keys.A) && Action.IsNotDone("AnswerShown"))
             {
                 Remove(_Question);
                 _Answer = new Text(230, 400, "Comic", Color.Black,
-                                        "sauba alta, weiter gehts..." + Environment.NewLine + "Drücke Enter zum fortfahren!",
+                                        "So sieht's aus, weiter gehts..." + Environment.NewLine + "Drücke Enter zum fortfahren!",
                                         "Schriftrolle");
                 DrawableObjects.Add(_Answer);
                 Action.SetDone("AnswerShown");
                 _RightAnswer = true;
                 _RightSound.Instance.Play();
+                SoundStore.Create("frage2").Instance.Play();
             }
 
-            if ((keyboard.IsKeyDown(Keys.B) || keyboard.IsKeyDown(Keys.C)) && Action.IsNotDone("AnswerShown"))
+            if ((keyboard.IsKeyDown(Keys.B) || keyboard.IsKeyDown(Keys.C) || keyboard.IsKeyDown(Keys.D)) && Action.IsNotDone("AnswerShown"))
             {
                 Remove(_Question);
                 Action.Delete("QuestionShown");
 
                 _Answer = new Text(230, 400, "Comic", Color.Black,
-                    "dumpfknödel, mann, mann, mann" + Environment.NewLine + "Drücke Enter zum fortfahren!",
+                    "Das ist leider falsch !!! " + Environment.NewLine + "Drücke Enter zum fortfahren!",
                     "Schriftrolle");
                 DrawableObjects.Add(_Answer);
                 Action.SetDone("AnswerShown");
@@ -165,10 +171,12 @@ namespace MarriageManiac.Scenes
         {
             if (Action.IsNotDone("QuestionShown"))
             {
-                var text = "warum ist die banane krumm?" + Environment.NewLine + Environment.NewLine
-                         + "a) deshalb " + Environment.NewLine
-                         + "b) weil halt " + Environment.NewLine
-                         + "c) is halt so " + Environment.NewLine + Environment.NewLine
+                var text = "Für was steht HTWG Konstanz?" + Environment.NewLine + Environment.NewLine
+                         + "a) Hochschule für Technik, Wirtschaft und Gestaltung " + Environment.NewLine
+                         + "b) Hochschule für Technologie, Wissenschaft und Grafik " + Environment.NewLine
+                         + "c) Hochschule für Technologie, Wirtschaft und Geisteswissenschaften " + Environment.NewLine
+                         + "d) Hangout für Tölpel, Wichte und Gesindel " + Environment.NewLine + Environment.NewLine
+
                          + "Drücke den entsprechenden Buchstaben auf der Tastatur!";
                 _Question = new Text(230, 180, "Comic", Color.Black, text, "Schriftrolle");
 
