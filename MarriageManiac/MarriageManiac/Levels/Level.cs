@@ -18,7 +18,6 @@ namespace MarriageManiac
         private const int COLUMNS = GoofyGame.SCREENWIDTH / BLOCKSIZE;
         private const int BLOCKSIZE = 20;
         private Texture2D _BlockTexture = null;
-        private Texture2D _SumTexture = null;
 
         public Vector2 StartPoint { get; private set; }
         public Vector2 GuestPoint { get; private set; }

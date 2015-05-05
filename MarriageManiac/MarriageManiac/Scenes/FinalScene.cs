@@ -157,6 +157,17 @@ namespace MarriageManiac
                 _Goofy.Laugh();
                 Remove(_Flash);
                 BackColor = Color.CornflowerBlue;
+                _Goofy.IsRemoteControlled = true;
+
+                _Goofy.WouldCollideWith += (obj, ev) =>
+                {
+                    if (ev.WouldCollideWith == Level.Right)
+                    {
+                        OnEnd();
+                    }
+                };
+
+                _Goofy.Move(Direction.Right);
             }
         }
     }

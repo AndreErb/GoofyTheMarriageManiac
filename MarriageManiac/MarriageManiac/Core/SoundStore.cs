@@ -35,5 +35,13 @@ namespace MarriageManiac.Core
         {
             return Store[soundName];
         }
+
+        public void StopAll()
+        {
+            foreach(var sound in Store)
+            {
+                sound.Value.Instance.Stop();
+            }
+        }
     }
 }

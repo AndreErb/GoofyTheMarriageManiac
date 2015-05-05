@@ -14,6 +14,7 @@ namespace MarriageManiac.Texts
         int _CharIndex;
         TimeSpan _Interval;
         TimeSpan _LastTime;
+        bool _Completed;
 
         public DelayedText(TimeSpan interval, int xPos, int yPos, string font, Color color, string text, string texture)
             : base(xPos, yPos, font, color, texture)
@@ -25,6 +26,7 @@ namespace MarriageManiac.Texts
             _FullText = text;
             _TextLength = _FullText.Length;
             _CharIndex = 0;
+            _Completed = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -40,7 +42,7 @@ namespace MarriageManiac.Texts
                 {
                     Text += _FullText[_CharIndex++].ToString();
 
-                    if (Text == _FullText)
+                    if (Text == _FullText && !_Completed)
                     {
                         Complete();
                     }

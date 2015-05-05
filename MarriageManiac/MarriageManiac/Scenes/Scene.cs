@@ -81,6 +81,8 @@ namespace MarriageManiac
 
         protected virtual void OnEnd()
         {
+            SoundStore.StopAll();
+
             if (Ended != null)
             {
                 Ended(this, new EventArgs());

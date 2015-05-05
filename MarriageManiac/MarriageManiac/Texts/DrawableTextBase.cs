@@ -42,6 +42,7 @@ namespace MarriageManiac.Texts
         public Vector2 Position
         {
             get { return _Position; }
+            set { _Position = value; }
         }
 
         protected void Complete()
