@@ -25,11 +25,11 @@ namespace MarriageManiac.Scenes
         public PfadfinderScene() : base()
         {}
 
-        public override void Load()
+        public override void Load(Goofy goofy)
         {
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660);
+            _Goofy = new Goofy(10, 660) { Lifes = goofy.Lifes };
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
 
             _Snoopy = new Snoopy(500, 600);

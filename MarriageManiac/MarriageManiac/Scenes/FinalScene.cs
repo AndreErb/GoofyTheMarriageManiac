@@ -33,7 +33,7 @@ namespace MarriageManiac
         public FinalScene() : base()
         {}
 
-        public override void Load()
+        public override void Load(Goofy goofy)
         {
             var horrorMusic = SoundStore.Create("HorrorMusic", "Haunted_Mansion");
             horrorMusic.Instance.IsLooped = true;
@@ -48,9 +48,8 @@ namespace MarriageManiac
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
             _LevelSymbol.RotateContiniously(0.1f);
 
-            _Goofy = new Goofy(340, 660);
+            _Goofy = new Goofy(340, 660) { Lifes = goofy.Lifes };
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
-            _Goofy.Lifes = 2;
 
             _Ufo = new Ufo(400, 50);
             _Ufo.Visible = false;
@@ -163,7 +162,7 @@ namespace MarriageManiac
                 {
                     if (ev.WouldCollideWith == Level.Right)
                     {
-                        OnEnd();
+                        OnEnd(_Goofy);
                     }
                 };
 

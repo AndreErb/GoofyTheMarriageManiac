@@ -10,7 +10,7 @@ using MarriageManiac.Core;
 
 namespace MarriageManiac.Characters
 {
-    class Goofy : CharacterBase
+    public class Goofy : CharacterBase
     {
         TimeSpan _TimeSinceLastShot = new TimeSpan();
 

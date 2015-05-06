@@ -30,7 +30,7 @@ namespace MarriageManiac.Scenes
         public SpeedScene() : base()
         {}
 
-        public override void Load()
+        public override void Load(Goofy goofy)
         {
             var music = SoundStore.Create("PacmanMusic");
             music.Instance.Pitch = -0.4f;
@@ -40,8 +40,7 @@ namespace MarriageManiac.Scenes
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660);
-            _Goofy.Lifes = 2;
+            _Goofy = new Goofy(10, 660) { Lifes = goofy.Lifes };
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
@@ -184,7 +183,7 @@ namespace MarriageManiac.Scenes
             else if (e.WouldCollideWith is WoodenGate)
             {
                 SoundStore.Sound("PacmanMusic").Instance.Stop();
-                OnEnd();
+                OnEnd(_Goofy);
             }
         }
     }

@@ -22,7 +22,7 @@ namespace MarriageManiac
         {
         }
 
-        public override void Load()
+        public override void Load(Goofy goofy)
         {
             BackColor = Color.Black;
             var music = SoundStore.Create("MyPrinceWillCome");

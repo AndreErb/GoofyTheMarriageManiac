@@ -115,7 +115,7 @@ namespace MarriageManiac.Scenes
                 weddingSound.Instance.Play();
 
                 // End the scene, when the music stops.
-                new Timer(_ => OnEnd()).Change(weddingSound.Duration, TimeSpan.Zero);
+                new Timer(_ => OnEnd(_Goofy)).Change(weddingSound.Duration, TimeSpan.Zero);
 
                 _Goofy.AllowFall = false;
                 _Goofy.CanCollide = false;

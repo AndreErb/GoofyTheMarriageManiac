@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
+using MarriageManiac.Characters;
 
 namespace MarriageManiac
 {
@@ -38,7 +39,7 @@ namespace MarriageManiac
         }
 
 
-        public void Load()
+        public void Load(Goofy goofy)
         {
             SetWindowCollisions();
 
@@ -75,7 +76,7 @@ namespace MarriageManiac
                     }
                 }
 
-                Scene.Load();
+                Scene.Load(goofy);
             }
         }
 

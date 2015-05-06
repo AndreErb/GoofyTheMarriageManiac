@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using MarriageManiac.Texts;
 using MarriageManiac.Core;
 using MarriageManiac.GameObjects;
+using MarriageManiac.Characters;
 
 namespace MarriageManiac
 {
@@ -28,7 +29,7 @@ namespace MarriageManiac
         public List<MarriageManiac.Core.IDrawable> DrawableObjects { get; private set; }
         public Level Level { get; set; }
         public Color BackColor { get; set; }
-        public virtual event EventHandler Ended;
+        public virtual event EventHandler<SceneEndArgs> Ended;
         private bool Started { get; set; }
         protected ActionStore Action { get; private set; }
         protected SoundStore SoundStore { get; private set; }
@@ -68,28 +69,23 @@ namespace MarriageManiac
             DrawableObjects.Remove(content);
         }
 
-        public void Clear(bool reloadLevel)
+        public void Clear()
         {
             CollidableObjects.Clear();
             DrawableObjects.Clear();
-
-            if (reloadLevel)
-            {
-                Level.Load();
-            }
         }
 
-        protected virtual void OnEnd()
+        protected virtual void OnEnd(Goofy goofy)
         {
             SoundStore.StopAll();
 
             if (Ended != null)
             {
-                Ended(this, new EventArgs());
+                Ended(this, new SceneEndArgs(goofy));
             }
         }
 
-        public virtual void Load()
+        public virtual void Load(Goofy goofy)
         {
             // Should be overwritten in sub classes!
         }
@@ -106,9 +102,19 @@ namespace MarriageManiac
 
         protected void GameOver()
         {
-            Clear(false);
+            Clear();
             BackColor = Color.DarkRed;
             DrawableObjects.Add(new GameOverSymbol());
         }
     } 
+
+    public class SceneEndArgs : EventArgs
+    {
+        public SceneEndArgs(Goofy goofy)
+        {
+            Goofy = goofy;
+        }
+
+        public Goofy Goofy {get; private set;}
+    }
 }
