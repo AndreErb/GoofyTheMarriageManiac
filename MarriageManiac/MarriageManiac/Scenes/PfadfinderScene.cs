@@ -51,7 +51,6 @@ namespace MarriageManiac.Scenes
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
             _Goofy = new Goofy(600, 0) { Lifes = goofy.Lifes };
-            _Goofy.Lifes = 3;
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
