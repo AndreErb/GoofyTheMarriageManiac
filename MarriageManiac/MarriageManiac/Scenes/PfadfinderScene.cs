@@ -42,6 +42,10 @@ namespace MarriageManiac.Scenes
             _RightKeys.Add(Keys.B);
             _RightKeys.Add(Keys.A);
 
+            var fire = SoundStore.Create("fireplace");
+            fire.Instance.IsLooped = true;
+            fire.Instance.Play();
+
             _RightSound = SoundStore.Create("rightanswer");
             _WrongSound = SoundStore.Create("wronganswer");
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
@@ -173,7 +177,7 @@ namespace MarriageManiac.Scenes
                 }
                 else
                 {
-                    _Goofy.LifePercentage = 0;
+                    _Goofy.LifePercentage -= 40;
                     _WrongSound.Instance.Play();
                 }
 
