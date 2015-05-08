@@ -33,6 +33,7 @@ namespace MarriageManiac
         private bool Started { get; set; }
         protected ActionStore Action { get; private set; }
         protected SoundStore SoundStore { get; private set; }
+        protected Goofy Goofy { get; set; }
 
         public virtual void Update(GameTime gameTime)
         {
@@ -73,6 +74,11 @@ namespace MarriageManiac
         {
             CollidableObjects.Clear();
             DrawableObjects.Clear();
+        }
+
+        public void EndScene()
+        {
+            OnEnd(Goofy);
         }
 
         protected virtual void OnEnd(Goofy goofy)

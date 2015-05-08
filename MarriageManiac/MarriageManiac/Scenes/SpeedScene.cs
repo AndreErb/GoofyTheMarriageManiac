@@ -14,7 +14,6 @@ namespace MarriageManiac.Scenes
 {
     public class SpeedScene : Scene
     {
-        Goofy _Goofy = null;
         Texture2D _CloudTexture = null;
         private bool _LevelSymbolShown = false;
         TimeSpan _LevelSymbolShowTime = new TimeSpan();
@@ -40,9 +39,9 @@ namespace MarriageManiac.Scenes
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660) { Lifes = goofy.Lifes };
-            _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
-            _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
+            Goofy = new Goofy(10, 660) { Lifes = goofy.Lifes };
+            Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
+            Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
             _LevelSymbol = new DrawableMovable(-100, -100, ContentStore.LoadImage("Level1"));
             _LevelSymbol.TargetReached += (obj, arg) => { _LevelSymbolShown = true; _LevelSymbol.ResetRotation(); };
@@ -56,7 +55,7 @@ namespace MarriageManiac.Scenes
             var goofyIcon = new GoofyIcon(0, 0);
             goofyIcon.Position = new Vector2(screenMiddle - distanceFromMiddle - goofyIcon.Bounds.Width, 10);
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
-            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
+            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + Goofy.Lifes, null);
 
             var countDown = TimeSpan.FromSeconds(COUNTER_SECONDS);
             _Counter = new Counter(countDown, _GoofyLifeBar.Bounds.X + 180, _GoofyLifeBar.Bounds.Y, Color.Gold);
@@ -65,7 +64,7 @@ namespace MarriageManiac.Scenes
             var gate = new WoodenGate(860, 25);
             _Clock = new Clock(10, 150);
 
-            Add(_Goofy);
+            Add(Goofy);
             Add(gate);
             Add(_Clock);
             DrawableObjects.Add(_LevelSymbol);
@@ -125,7 +124,7 @@ namespace MarriageManiac.Scenes
         void Counter_TimeChanged(object sender, TimeChangedEventArgs e)
         {
             var restLife = (e.CurrentTime.TotalSeconds / COUNTER_SECONDS) * 100;
-            _Goofy.LifePercentage = (decimal)restLife;
+            Goofy.LifePercentage = (decimal)restLife;
         }
 
         void _Goofy_LifeAmountChanged(object sender, LifeAmountChangedArgs e)
@@ -134,7 +133,7 @@ namespace MarriageManiac.Scenes
 
             if (e.CurrentLifePercentage <= 0 && Action.IsNotDone("GoofyHasDied"))
             {
-                if (_Goofy.Lifes > 0)
+                if (Goofy.Lifes > 0)
                 {
                     LetGoofyDieAndRevive();
                 }
@@ -149,16 +148,16 @@ namespace MarriageManiac.Scenes
         {
             Action.SetDone("GoofyHasDied");
 
-            _Goofy.IsRemoteControlled = true;
-            _Goofy.Die();
-            _LifeText.Text = " X " + _Goofy.Lifes;
+            Goofy.IsRemoteControlled = true;
+            Goofy.Die();
+            _LifeText.Text = " X " + Goofy.Lifes;
 
             Timer timer = null;
 
             TimerCallback reviveGoofy = _ =>
             {
-                _Goofy.ReviveAt(10, 660);
-                _Goofy.IsRemoteControlled = false;
+                Goofy.ReviveAt(10, 660);
+                Goofy.IsRemoteControlled = false;
                 timer.Dispose();
 
                 Action.Delete("GoofyHasDied");
@@ -183,7 +182,7 @@ namespace MarriageManiac.Scenes
             else if (e.WouldCollideWith is WoodenGate)
             {
                 SoundStore.Sound("PacmanMusic").Instance.Stop();
-                OnEnd(_Goofy);
+                OnEnd(Goofy);
             }
         }
     }

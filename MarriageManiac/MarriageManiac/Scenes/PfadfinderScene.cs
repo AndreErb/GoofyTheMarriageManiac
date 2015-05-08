@@ -15,7 +15,6 @@ namespace MarriageManiac.Scenes
 {
     public class PfadfinderScene : Scene
     {
-        Goofy _Goofy = null;
         Snoopy _Snoopy = null;
         Texture2D _CloudTexture = null;
         private bool _LevelSymbolShown = false;
@@ -50,9 +49,9 @@ namespace MarriageManiac.Scenes
             _WrongSound = SoundStore.Create("wronganswer");
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(600, 0) { Lifes = goofy.Lifes };
-            _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
-            _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
+            Goofy = new Goofy(600, 0) { Lifes = goofy.Lifes };
+            Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
+            Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
             _Snoopy = new Snoopy(500, 100, false);
             _Snoopy.ActualQuestion = 0;
@@ -69,16 +68,16 @@ namespace MarriageManiac.Scenes
             var goofyIcon = new GoofyIcon(0, 0);
             goofyIcon.Position = new Vector2(screenMiddle - distanceFromMiddle - goofyIcon.Bounds.Width, 10);
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
-            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
+            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + Goofy.Lifes, null);
 
             var gate = new WoodenGate(1, 600);
             Add(gate);
 
-            CollidableObjects.Add(_Goofy);
+            CollidableObjects.Add(Goofy);
             CollidableObjects.Add(_Snoopy);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.3f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.5f));
-            DrawableObjects.Add(_Goofy);
+            DrawableObjects.Add(Goofy);
             DrawableObjects.Add(_Snoopy);
             DrawableObjects.Add(goofyIcon);
             DrawableObjects.Add(_GoofyLifeBar);
@@ -97,11 +96,11 @@ namespace MarriageManiac.Scenes
             {
                 if(_Snoopy.ActualQuestion<5)
                 {
-                    _Goofy.LifePercentage = 0;
+                    Goofy.LifePercentage = 0;
                 }
                 else
                 {
-                    OnEnd(_Goofy);
+                    OnEnd(Goofy);
                 }
 
                 
@@ -185,7 +184,7 @@ namespace MarriageManiac.Scenes
                 }
                 else
                 {
-                    _Goofy.LifePercentage -= 40;
+                    Goofy.LifePercentage -= 40;
                     _WrongSound.Instance.Play();
                 }
 
@@ -229,16 +228,16 @@ namespace MarriageManiac.Scenes
         {
             Action.SetDone("GoofyHasDied");
 
-            _Goofy.IsRemoteControlled = true;
-            _Goofy.Die();
-            _LifeText.Text = " X " + _Goofy.Lifes;
+            Goofy.IsRemoteControlled = true;
+            Goofy.Die();
+            _LifeText.Text = " X " + Goofy.Lifes;
 
             Timer timer = null;
 
             TimerCallback reviveGoofy = _ =>
             {
-                _Goofy.ReviveAt(600, 0);
-                _Goofy.IsRemoteControlled = false;
+                Goofy.ReviveAt(600, 0);
+                Goofy.IsRemoteControlled = false;
                 timer.Dispose();
 
                 Action.Delete("GoofyHasDied");
@@ -255,7 +254,7 @@ namespace MarriageManiac.Scenes
 
             if (e.CurrentLifePercentage <= 0 && Action.IsNotDone("GoofyHasDied"))
             {
-                if (_Goofy.Lifes > 0)
+                if (Goofy.Lifes > 0)
                 {
                     LetGoofyDieAndRevive();
                 }

@@ -18,7 +18,6 @@ namespace MarriageManiac
     /// </summary>
     public class FinalScene : Scene
     {
-        Goofy _Goofy = null;
         Texture2D _CloudTexture = null;
         private bool _LevelSymbolShown = false;
         TimeSpan _LevelSymbolShowTime = new TimeSpan();
@@ -48,8 +47,8 @@ namespace MarriageManiac
             _LevelSymbol.SetOrigin(Drawable.OriginPoint.Center); // Rotation around the center.
             _LevelSymbol.RotateContiniously(0.1f);
 
-            _Goofy = new Goofy(340, 660) { Lifes = goofy.Lifes };
-            _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
+            Goofy = new Goofy(340, 660) { Lifes = goofy.Lifes };
+            Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
 
             _Ufo = new Ufo(400, 50);
             _Ufo.Visible = false;
@@ -67,7 +66,7 @@ namespace MarriageManiac
             _GoofyLifeBar = new FillableRectangle((int)goofyIcon.Position.X - 1 - _LifeBarWidth, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
             _UfoLifeBar = new FillableRectangle((int)ufoIcon.Position.X + ufoIcon.Bounds.Width + 1, 20, _LifeBarWidth, 25, 1, Color.Yellow, Color.Black);
 
-            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + _Goofy.Lifes, null);
+            _LifeText = new Text((int)goofyIcon.Position.X + 5, goofyIcon.Bounds.Bottom + 4, "Comic", Color.Gold, " X " + Goofy.Lifes, null);
 
             _Flash = new Flash(0, 0, ContentStore.LoadImage("Flash"));
 
@@ -76,7 +75,7 @@ namespace MarriageManiac
 
             DrawableObjects.Add(_Flash);
             Add(_Ufo);
-            Add(_Goofy);
+            Add(Goofy);
             DrawableObjects.Add(new Cloud(400, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(new Cloud(200, 20, _CloudTexture, 0.8f));
             DrawableObjects.Add(_GoofyLifeBar);
@@ -104,7 +103,7 @@ namespace MarriageManiac
 
             if (Action.IsDone("GoofyHasDied"))
             {
-                if (_Goofy.Lifes == 0)
+                if (Goofy.Lifes == 0)
                 {
                     GameOver();
                 }
@@ -118,9 +117,9 @@ namespace MarriageManiac
                     {
                         Action.Delete("GoofyHasDied");
 
-                        if (_Goofy.Lifes > 0)
+                        if (Goofy.Lifes > 0)
                         {
-                            _Goofy.ReviveAt(340, 660);
+                            Goofy.ReviveAt(340, 660);
                             _Ufo.Shooting = true;
                         }
                     }
@@ -141,8 +140,8 @@ namespace MarriageManiac
 
                 _Ufo.Shooting = false;
 
-                _Goofy.Die();
-                _LifeText.Text = " X " + _Goofy.Lifes;
+                Goofy.Die();
+                _LifeText.Text = " X " + Goofy.Lifes;
             }
         }
 
@@ -153,20 +152,20 @@ namespace MarriageManiac
             if (e.CurrentLifePercentage <= 0)
             {
                 SoundStore.Sound("HorrorMusic").Instance.Stop();
-                _Goofy.Laugh();
+                Goofy.Laugh();
                 Remove(_Flash);
                 BackColor = Color.CornflowerBlue;
-                _Goofy.IsRemoteControlled = true;
+                Goofy.IsRemoteControlled = true;
 
-                _Goofy.WouldCollideWith += (obj, ev) =>
+                Goofy.WouldCollideWith += (obj, ev) =>
                 {
                     if (ev.WouldCollideWith == Level.Right)
                     {
-                        OnEnd(_Goofy);
+                        OnEnd(Goofy);
                     }
                 };
 
-                _Goofy.Move(Direction.Right);
+                Goofy.Move(Direction.Right);
             }
         }
     }

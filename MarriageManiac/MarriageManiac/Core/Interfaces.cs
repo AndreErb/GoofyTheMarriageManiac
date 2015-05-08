@@ -19,6 +19,7 @@ namespace MarriageManiac.Core
         void Start();
         void Stop();
         void Update(GameTime gameTime);
+        void EndScene();
         event EventHandler<SceneEndArgs> Ended;
     }
     

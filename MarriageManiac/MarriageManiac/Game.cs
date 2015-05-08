@@ -27,7 +27,9 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
+        IScene _Scene = null;
         int _LevelIndex = 0;
+        DateTime _LastCheatKeyTime = DateTime.MinValue;
         
         public GoofyGame()
         {
@@ -65,60 +67,55 @@ namespace MarriageManiac
 
         void scene_Ended(object sender, SceneEndArgs e)
         {
+            if (_Scene != null)
+            {
+                _Scene.Ended -= new EventHandler<SceneEndArgs>(scene_Ended);  
+            }
+
             LoadLevel(++_LevelIndex, e.Goofy);
+        }
+
+        private void NextScene(IScene scene, string levelFile)
+        {
+            _Scene = scene;
+            _Scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
+            _Level = new Level(_Scene, levelFile);
         }
         
         private void LoadLevel(int level, Goofy goofy)
         {
-            string levelName = String.Format("Level{0}.txt", _LevelIndex);
-
+            var levelName = String.Format("Level{0}.txt", _LevelIndex);
             var levelFile = Directory.GetFiles(@"Levels\", levelName).FirstOrDefault();
             if (levelFile != null)
             {
                 _Level = null;
-                IScene scene = null;
 
                 switch (_LevelIndex)
                 {
                     case 0: // Prolog
-                        scene = new PrologScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new PrologScene(), levelFile);
+
                         break;
                     case 1: // Speed-Level
-                        scene = new SpeedScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new SpeedScene(), levelFile);
                         break;
                     case 2: // Schmid
-                        scene = new SchmidScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new SchmidScene(), levelFile);
                         break;
                     case 3: // Garloff
-                        scene = new GarloffScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new GarloffScene(), levelFile);
                         break;
                     case 4: // Pfadfinder
-                        scene = new PfadfinderScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new PfadfinderScene(), levelFile);
                         break;
                     case 5: // Endboss
-                        scene = new FinalScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new FinalScene(), levelFile);
                         break;
                     case 6: // Hochzeitsszene
-                        scene = new MarriageScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new MarriageScene(), levelFile);
                         break;
                     case 7: // Credits
-                        scene = new CreditsScene();
-                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
-                        _Level = new Level(scene, levelFile);
+                        NextScene(new CreditsScene(), levelFile);
                         break;
                 }
 
@@ -128,7 +125,7 @@ namespace MarriageManiac
                 }
             }
         }
-
+        
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
@@ -150,10 +147,34 @@ namespace MarriageManiac
                 GRAPHICS.ToggleFullScreen();
             }
 
+            CheckCheat();
+            
             _Level.Update(gameTime);
                 
             base.Update(gameTime);
         }
+
+        private void NextScene()
+        {
+            if (_Scene != null)
+            {
+                _Scene.EndScene();
+            }
+        }
+               
+        private void CheckCheat()
+        {
+            // If che"@"t is pressed ;-)
+            if (Keyboard.GetState().IsKeyDown(Keys.Q) && 
+                Keyboard.GetState().IsKeyDown(Keys.RightAlt))
+            {
+                if (DateTime.Now - _LastCheatKeyTime > TimeSpan.FromSeconds(1))
+                {
+                    _LastCheatKeyTime = DateTime.Now;
+                    NextScene();
+                }
+            }
+        }               
                 
         /// <summary>
         /// This is called when the game should draw itself.

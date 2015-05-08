@@ -17,7 +17,6 @@ namespace MarriageManiac.Scenes
         bool _Started = false;
         TimeSpan _Elapsed = new TimeSpan();
         Texture2D _CloudTexture = null;
-        Goofy _Goofy = null;
         Daisy _Daisy = null;
         PanzerknackerGroup _PanzerknackerGroup = null;
         Drawable _Sun = null;
@@ -47,11 +46,11 @@ namespace MarriageManiac.Scenes
             _Flash = new Flash(0, 0, ContentStore.LoadImage("Flash"));
             _Flash.Visible = false;
 
-            _Goofy = new Goofy(10, 660);
-            _Goofy.IsRemoteControlled = true;
-            _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
+            Goofy = new Goofy(10, 660);
+            Goofy.IsRemoteControlled = true;
+            Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
-            _Daisy = new Daisy(_Goofy.Bounds.Right, 660);
+            _Daisy = new Daisy(Goofy.Bounds.Right, 660);
             _Daisy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Daisy_WouldCollideWith);
 
             _PanzerknackerGroup = new PanzerknackerGroup(850, 660);
@@ -64,17 +63,17 @@ namespace MarriageManiac.Scenes
             DrawableObjects.Add(new Cloud(300, 60, _CloudTexture, 0.7f));
             DrawableObjects.Add(new Cloud(700, 70, _CloudTexture, 0.5f));
             DrawableObjects.Add(_Flash);
-            DrawableObjects.Add(_Goofy);
+            DrawableObjects.Add(Goofy);
             DrawableObjects.Add(_Daisy);
             DrawableObjects.Add(_PanzerknackerGroup);
-            CollidableObjects.Add(_Goofy);
+            CollidableObjects.Add(Goofy);
             CollidableObjects.Add(_Daisy);
             CollidableObjects.Add(_PanzerknackerGroup);
         }
 
         public override void Load(Goofy goofy)
         {
-            _Goofy.Lifes = goofy.Lifes;
+            Goofy.Lifes = goofy.Lifes;
         }
 
         void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)
@@ -82,10 +81,10 @@ namespace MarriageManiac.Scenes
             if (e.WouldCollideWith == Level.Right)
             {
                 //If we have returned to the right wall.
-                Remove(_Goofy);
+                Remove(Goofy);
 
                 SoundStore.Sound("HorrorMusic").Instance.Stop();
-                OnEnd(_Goofy);
+                OnEnd(Goofy);
             }
         }
 
@@ -153,8 +152,8 @@ namespace MarriageManiac.Scenes
 
             if (_Daisy.Position.X > 450)
             {
-                _Goofy.Jump(JumpMode.Jump);
-                _Goofy.Move(Direction.Right);
+                Goofy.Jump(JumpMode.Jump);
+                Goofy.Move(Direction.Right);
             }
 
             // Update the collidables and drawables
