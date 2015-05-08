@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using System.IO;
 using MarriageManiac.Scenes;
 using MarriageManiac.Core;
+using MarriageManiac.Characters;
 
 namespace MarriageManiac
 {
@@ -26,7 +27,7 @@ namespace MarriageManiac
      
         SpriteBatch _SpriteBatch;
         Level _Level = null;
-        int _LevelIndex = 4;
+        int _LevelIndex = 0;
         
         public GoofyGame()
         {
@@ -58,16 +59,16 @@ namespace MarriageManiac
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _SpriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            LoadLevel(_LevelIndex);          
+
+            LoadLevel(_LevelIndex, new Goofy(0, 0) { Lifes = 3 });          
         }
-                
-        void scene_Ended(object sender, EventArgs e)
+
+        void scene_Ended(object sender, SceneEndArgs e)
         {
-            LoadLevel(++_LevelIndex);
+            LoadLevel(++_LevelIndex, e.Goofy);
         }
         
-        private void LoadLevel(int level)
+        private void LoadLevel(int level, Goofy goofy)
         {
             string levelName = String.Format("Level{0}.txt", _LevelIndex);
 
@@ -81,44 +82,49 @@ namespace MarriageManiac
                 {
                     case 0: // Prolog
                         scene = new PrologScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                     case 1: // Speed-Level
                         scene = new SpeedScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                     case 2: // Schmid
                         scene = new SchmidScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                     case 3: // Garloff
                         scene = new GarloffScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                     case 4: // Pfadfinder
                         scene = new PfadfinderScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                     case 5: // Endboss
                         scene = new FinalScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                     case 6: // Hochzeitsszene
                         scene = new MarriageScene();
-                        scene.Ended += new EventHandler(scene_Ended);
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
+                        _Level = new Level(scene, levelFile);
+                        break;
+                    case 7: // Credits
+                        scene = new CreditsScene();
+                        scene.Ended += new EventHandler<SceneEndArgs>(scene_Ended);
                         _Level = new Level(scene, levelFile);
                         break;
                 }
 
                 if (_Level != null)
                 {
-                    _Level.Load();
+                    _Level.Load(goofy);
                 }
             }
         }

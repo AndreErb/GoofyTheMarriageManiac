@@ -36,7 +36,7 @@ namespace MarriageManiac.Scenes
         public SchmidScene() : base()
         {}
 
-        public override void Load()
+        public override void Load(Goofy goofy)
         {
             var spaceMusic = SoundStore.Create("meer_rauschen");
             spaceMusic.Instance.IsLooped = true;
@@ -46,8 +46,7 @@ namespace MarriageManiac.Scenes
             _WrongSound = SoundStore.Create("wronganswer");
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660);
-            _Goofy.Lifes = 2;
+            _Goofy = new Goofy(10, 660) { Lifes = goofy.Lifes };
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
             _Schmid = new Schmid(200, 0);
@@ -95,7 +94,7 @@ namespace MarriageManiac.Scenes
             }
             else if (e.WouldCollideWith is WoodenGate)
             {
-                OnEnd();
+                OnEnd(_Goofy);
             }
         }
 

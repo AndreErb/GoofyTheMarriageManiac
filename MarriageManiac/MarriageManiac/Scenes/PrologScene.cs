@@ -72,6 +72,11 @@ namespace MarriageManiac.Scenes
             CollidableObjects.Add(_PanzerknackerGroup);
         }
 
+        public override void Load(Goofy goofy)
+        {
+            _Goofy.Lifes = goofy.Lifes;
+        }
+
         void _Goofy_WouldCollideWith(object sender, WouldCollideEventArgs e)
         {
             if (e.WouldCollideWith == Level.Right)
@@ -80,7 +85,7 @@ namespace MarriageManiac.Scenes
                 Remove(_Goofy);
 
                 SoundStore.Sound("HorrorMusic").Instance.Stop();
-                OnEnd();
+                OnEnd(_Goofy);
             }
         }
 

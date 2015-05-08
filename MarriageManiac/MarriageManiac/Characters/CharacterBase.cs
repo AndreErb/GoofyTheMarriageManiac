@@ -25,7 +25,7 @@ namespace MarriageManiac
     }
 
 
-    abstract class CharacterBase : Rotation, IGameContent
+    public abstract class CharacterBase : Rotation, IGameContent
     {
         const float STEP = 10;
         int gravity = 3;

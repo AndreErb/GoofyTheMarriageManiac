@@ -34,7 +34,7 @@ namespace MarriageManiac.Scenes
             : base()
         { }
 
-        public override void Load()
+        public override void Load(Goofy goofy)
         {
             var spaceMusic = SoundStore.Create("space");
             spaceMusic.Instance.IsLooped = true;
@@ -45,8 +45,7 @@ namespace MarriageManiac.Scenes
 
             _CloudTexture = ContentStore.LoadImage("cloud_PNG13");
 
-            _Goofy = new Goofy(10, 660);
-            _Goofy.Lifes = 2;
+            _Goofy = new Goofy(10, 660) { Lifes = goofy.Lifes };
             _Goofy.LifeAmountChanged += new EventHandler<LifeAmountChangedArgs>(_Goofy_LifeAmountChanged);
             _Goofy.WouldCollideWith += new EventHandler<WouldCollideEventArgs>(_Goofy_WouldCollideWith);
 
@@ -89,7 +88,7 @@ namespace MarriageManiac.Scenes
             }
             else if (e.WouldCollideWith is PiGate)
             {
-                OnEnd();
+                OnEnd(_Goofy);
             }
         }
 

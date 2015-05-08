@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MarriageManiac.Core;
+using MarriageManiac.Characters;
 
 namespace MarriageManiac.Core
 {
@@ -14,11 +15,11 @@ namespace MarriageManiac.Core
         List<IDrawable> DrawableObjects { get; }
         Level Level { get; set; }
         Color BackColor { get; set; }
-        void Load();
+        void Load(Goofy goofy);
         void Start();
         void Stop();
         void Update(GameTime gameTime);
-        event EventHandler Ended;
+        event EventHandler<SceneEndArgs> Ended;
     }
     
     public interface IDrawable

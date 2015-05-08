@@ -91,6 +91,16 @@ with.
         <Start>&#223;</Start>
         <End>&#223;</End>
       </CharacterRegion>
+      <!-- Character Region für das Zeichen "©" -->
+      <CharacterRegion>
+        <Start>&#169;</Start>
+        <End>&#169;</End>
+      </CharacterRegion>
+      <!-- Character Region für das Zeichen "é" -->
+      <CharacterRegion>
+        <Start>é</Start>
+        <End>é</End>
+      </CharacterRegion>
     </CharacterRegions>
   </Asset>
 </XnaContent>
