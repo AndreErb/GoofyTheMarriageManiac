@@ -24,7 +24,7 @@ namespace MarriageManiac.Scenes
         Text _LifeText;
         Counter _Counter;
         Clock _Clock;
-        const double COUNTER_SECONDS = 45;
+        const double COUNTER_SECONDS = 60;
 
         public SpeedScene() : base()
         {}
