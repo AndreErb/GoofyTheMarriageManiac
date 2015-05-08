@@ -127,7 +127,12 @@ namespace MarriageManiac.Scenes
                 CollidableObjects.Add(co2);
                 Add(new Explosion(300, 520));
                 Add(new Explosion(400, 480));
-
+                Add(new Explosion(310, 520));
+                Add(new Explosion(420, 500));
+                Add(new Explosion(330, 480));
+                Add(new Explosion(440, 500));
+                Add(new Explosion(350, 450));
+                Add(new Explosion(420, 500));
             }
 
             if (keyboard.IsKeyDown(Keys.Enter) && Action.IsDone("AnswerShown"))
@@ -139,7 +144,7 @@ namespace MarriageManiac.Scenes
             {
                 Remove(_Question);
                 _Answer = new Text(230, 400, "Comic", Color.Black,
-                                        "So sieht's aus, weiter gehts..." + Environment.NewLine + "Drücke Enter zum fortfahren!",
+                                        "So sieht's aus. Ich versuche mich mal als Treppenbauer... " + Environment.NewLine + "Drücke Enter zum fortfahren!",
                                         "Schriftrolle");
                 DrawableObjects.Add(_Answer);
                 Action.SetDone("AnswerShown");

@@ -10,13 +10,23 @@ namespace MarriageManiac.Characters
 {
     class Snoopy : StandardCharacter
     {
-        public Snoopy(int startX, int startY)
+        public int ActualQuestion { get; set; }
+
+        public Snoopy(int startX, int startY, bool isLeft)
             : base()
         {
             ImageLeft = ContentStore.LoadImage("SnoopyLinks");
             ImageRight = ContentStore.LoadImage("SnoopyRechts");
 
-            CurrentImage = ImageLeft;
+            if (isLeft)
+            {
+                CurrentImage = ImageLeft;
+            }
+            else
+            {
+                CurrentImage = ImageRight;
+            }
+            
             Bounds = new Rectangle(startX, startY, CurrentImage.Width, CurrentImage.Height);
         }
     }

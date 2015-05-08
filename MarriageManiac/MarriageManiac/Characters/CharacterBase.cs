@@ -58,7 +58,7 @@ namespace MarriageManiac
         public event EventHandler<MovingEventArgs> Moved;
 
         public Direction Direction { get; private set; }
-        public Direction ViewDirection { get; protected set; }
+        public Direction ViewDirection { get; set; }
         public JumpMode JumpMode { get; private set; }
         public bool Visible { get; set; }
         public bool CanCollide { get; set; }
