@@ -29,6 +29,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <SupportUrl>https://github.com/AndreErb</SupportUrl>
+    <ErrorReportUrl>https://github.com/danielseidel1</ErrorReportUrl>
     <TargetCulture>de-DE</TargetCulture>
     <ProductName>GoofyTheMarriageManiac</ProductName>
     <PublisherName>WeddingSoft Inc.</PublisherName>
