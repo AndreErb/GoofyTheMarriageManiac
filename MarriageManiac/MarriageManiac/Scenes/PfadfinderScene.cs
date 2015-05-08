@@ -118,7 +118,8 @@ namespace MarriageManiac.Scenes
                              + "a) Nordkorea " + Environment.NewLine
                              + "b) Thailand " + Environment.NewLine
                              + "c) Japan" + Environment.NewLine + Environment.NewLine
-                             + "Drücke den entsprechenden Buchstaben auf der Tastatur!";
+                             + "Drücke den entsprechenden Buchstaben auf der Tastatur!" + Environment.NewLine + Environment.NewLine
+                             + "Hinweis: Pfadfinder sind neugierig!";
                 }
                 else if (_Snoopy.ActualQuestion == 1)
                 {
