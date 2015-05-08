@@ -96,7 +96,16 @@ namespace MarriageManiac.Scenes
             }
             else if (e.WouldCollideWith is WoodenGate)
             {
-                OnEnd(_Goofy);
+                if(_Snoopy.ActualQuestion<5)
+                {
+                    _Goofy.LifePercentage = 0;
+                }
+                else
+                {
+                    OnEnd(_Goofy);
+                }
+
+                
             }
         }
 
