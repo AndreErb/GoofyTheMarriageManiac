@@ -44,8 +44,8 @@ namespace MarriageManiac
                      + "Charakter Design:" + NL + NL
                      + "   Walt Disney Company (WDC)" + NL + NL + NL + NL
                      + "Programmierung:" + NL + NL
-                     + "   Daniel Seidel (WeddingSoft Inc.)" + NL + NL
-                     + "   Andre Erb (WeddingSoft Inc.)" + NL + NL + NL + NL
+                     + "   Andre Erb (WeddingSoft Inc.)" + NL + NL
+                     + "   Daniel Seidel (WeddingSoft Inc.)" + NL + NL + NL + NL
                      + "Level Design:" + NL + NL
                      + "   Daniel Seidel (WeddingSoft Inc.)" + NL + NL
                      + "   Andre Erb (WeddingSoft Inc.)" + NL + NL + NL + NL
