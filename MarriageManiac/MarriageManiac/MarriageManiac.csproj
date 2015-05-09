@@ -19,7 +19,7 @@
     <ApplicationIcon>GoofyIcon.ico</ApplicationIcon>
     <Thumbnail>GoofyLogo.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\temp\GoofySetup\</PublishUrl>
+    <PublishUrl>C:\temp\Goofy_Full_Setup\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -34,7 +34,6 @@
     <TargetCulture>de-DE</TargetCulture>
     <ProductName>GoofyTheMarriageManiac</ProductName>
     <PublisherName>WeddingSoft Inc.</PublisherName>
-    <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.1</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
