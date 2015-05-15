@@ -15,8 +15,8 @@ Systemsteuerung => Programme und Funktionen
 => Rechte Maust. auf "Goofy The Marriage Maniac" => Deinstallieren
 
 Tasten:
-Links gehen: Pfeil Links <- 
-Links gehen: Pfeil Links <- 
+Links gehen:  Pfeil Links  <- 
+Rechts gehen: Pfeil Rechts -> 
 Springen: Leertaste
 Schießen: X
 Vollbild an/aus: F12
